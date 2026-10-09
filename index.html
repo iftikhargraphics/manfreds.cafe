@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANFRED'S // Speciality Coffee & Craft Lagerbier</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0D0F12',
+                        'obsidian-card': 'rgba(22, 26, 33, 0.75)',
+                        'obsidian-border': 'rgba(255, 255, 255, 0.08)',
+                        coffee: '#E67E22',
+                        'coffee-glow': 'rgba(230, 126, 34, 0.4)',
+                        lager: '#F1C40F',
+                        'lager-glow': 'rgba(241, 196, 15, 0.4)',
+                        neon: '#00FF87',
+                        'neon-glow': 'rgba(0, 255, 135, 0.3)',
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
+                        'scanline': 'scanline 8s linear infinite',
+                        'radar-pulse': 'radarPulse 2s infinite ease-out',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+                            '50%': { opacity: 0.8, transform: 'scale(1.03)' },
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(1000%)' }
+                        },
+                        radarPulse: {
+                            '0%': { transform: 'scale(0.8)', opacity: 1 },
+                            '100%': { transform: 'scale(2.5)', opacity: 0 }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0D0F12; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E67E22; }
+
+        /* Theme state transition variables */
+        :root {
+            --accent-color: #E67E22;
+            --accent-glow: rgba(230, 126, 34, 0.35);
+            --accent-border: rgba(230, 126, 34, 0.5);
+        }
+
+        body.lager-state {
+            --accent-color: #F1C40F;
+            --accent-glow: rgba(241, 196, 15, 0.35);
+            --accent-border: rgba(241, 196, 15, 0.5);
+        }
+
+        .dynamic-accent { color: var(--accent-color); }
+        .dynamic-bg-accent { background-color: var(--accent-color); }
+        .dynamic-border-accent { border-color: var(--accent-border); }
+        .dynamic-shadow-glow { box-shadow: 0 0 25px var(--accent-glow); }
+        .dynamic-text-glow { text-shadow: 0 0 12px var(--accent-glow); }
+
+        /* Cyber grid overlay */
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(22, 26, 33, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(18, 22, 28, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            border-color: var(--accent-border);
+            box-shadow: 0 8px 32px var(--accent-glow);
+            transform: translateY(-3px);
+        }
+
+        /* Scanline effect overlay */
+        .scanline-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .scanline-container::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            z-index: 20;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-gray-100 font-sans selection:bg-orange-500 selection:text-white min-h-screen overflow-x-hidden transition-colors duration-500">
+
+    <!-- Toast Notification System -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Background Canvas animation -->
+    <canvas id="ambient-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group" onclick="playAudio('click')">
+                <div class="w-10 h-10 rounded-lg bg-black/60 border border-white/15 flex items-center justify-center relative overflow-hidden group-hover:border-white/40 transition-colors">
+                    <span id="brand-logo-icon" class="text-xl dynamic-accent">☕</span>
+                    <div class="absolute inset-0 dynamic-bg-accent opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                </div>
+                <div>
+                    <div class="font-display text-xl font-extrabold tracking-wider text-white uppercase flex items-center gap-1.5">
+                        MANFRED'S <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-white/10 text-gray-300 font-normal tracking-normal border border-white/10">S11</span>
+                    </div>
+                    <div class="text-[10px] font-mono text-gray-400 tracking-widest uppercase flex items-center gap-2">
+                        <span>Coffee</span> <span class="dynamic-accent">•</span> <span>Lagerbier</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- HUD Centerpiece: Real-time Operational Status -->
+            <div class="hidden lg:flex items-center px-4 py-1.5 rounded-full bg-black/40 border border-white/10 font-mono text-xs gap-3">
+                <div class="flex items-center gap-2">
+                    <span id="hud-status-dot" class="w-2.5 h-2.5 rounded-full bg-neon animate-pulse"></span>
+                    <span id="hud-status-text" class="text-neon font-semibold tracking-wide">[ 🟢 OPERATIONAL ]</span>
+                </div>
+                <span class="text-gray-600">|</span>
+                <div class="text-gray-300 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span id="hud-time-display">SHEFFIELD 19:42:00</span>
+                </div>
+            </div>
+
+            <!-- Header Controls & Mode Switcher -->
+            <div class="flex items-center gap-3">
+                <!-- Dual Mode Toggle Button -->
+                <div class="bg-black/60 p-1 rounded-xl border border-white/10 flex items-center gap-1 font-mono text-xs">
+                    <button id="btn-state-espresso" onclick="switchThemeMode('espresso')" class="px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm">
+                        <span>☕</span> <span class="hidden sm:inline">ESPRESSO</span>
+                    </button>
+                    <button id="btn-state-lager" onclick="switchThemeMode('lager')" class="px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white">
+                        <span>🍺</span> <span class="hidden sm:inline">LAGERBIER</span>
+                    </button>
+                </div>
+
+                <!-- Order Tray Trigger Button -->
+                <button onclick="toggleOrderTray()" class="relative p-2.5 rounded-xl bg-black/60 border border-white/10 hover:border-white/30 text-gray-200 transition-colors flex items-center gap-2 font-mono text-xs">
+                    <svg class="w-5 h-5 dynamic-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span class="hidden md:inline font-semibold">TRAY</span>
+                    <span id="tray-count-badge" class="w-5 h-5 rounded-full dynamic-bg-accent text-black font-bold text-[10px] flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden cyber-grid z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Main Copy Column -->
+                <div class="lg:col-span-7 space-y-6">
+                    <!-- HUD Operational Pill (Mobile & Tablet visible) -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-black/60 border border-white/10 font-mono text-xs text-gray-300">
+                        <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
+                        <span class="text-gray-400">STATUS:</span>
+                        <span id="hero-hud-detail" class="text-neon font-bold tracking-wider">ONLINE // SHEFFIELD S11</span>
+                    </div>
+
+                    <!-- Dynamic Headline -->
+                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[1.05]">
+                        PRECISION <br>
+                        <span id="hero-headline-accent" class="dynamic-accent dynamic-text-glow transition-all duration-500">SPECIALITY BEVERAGES</span> <br>
+                        &amp; CRAFT CULTURE.
+                    </h1>
+
+                    <!-- Dynamic Subtitle -->
+                    <p id="hero-description" class="text-base sm:text-lg text-gray-300 max-w-2xl font-normal leading-relaxed">
+                        Situated at 1 Rustlings Rd directly opposite Endcliffe Park. We craft single-origin pour-overs and precision espresso by day, seamlessly shifting into rare German &amp; artisan craft lagers by night.
+                    </p>
+
+                    <!-- Key Spec Grid HUD -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 font-mono text-xs">
+                        <div class="p-3 rounded-lg glass-card border border-white/5">
+                            <span class="text-gray-500 block text-[10px] uppercase">Google Rating</span>
+                            <span class="text-lg font-bold text-yellow-400 flex items-center gap-1">4.9 ★ <span class="text-xs text-gray-400 font-normal">(18+)</span></span>
+                        </div>
+                        <div class="p-3 rounded-lg glass-card border border-white/5">
+                            <span class="text-gray-500 block text-[10px] uppercase">Price Tier</span>
+                            <span class="text-lg font-bold text-white">£1 – £10 <span class="text-xs text-gray-400 font-normal">/ pers</span></span>
+                        </div>
+                        <div class="p-3 rounded-lg glass-card border border-white/5 col-span-2 sm:col-span-1">
+                            <span class="text-gray-500 block text-[10px] uppercase">Location Zone</span>
+                            <span class="text-sm font-bold text-gray-200 truncate block">Endcliffe Park, UK</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Action Row -->
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#menu-matrix" onclick="playAudio('click')" class="px-7 py-4 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-sm tracking-wider uppercase flex items-center gap-3 hover:opacity-95 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]">
+                            <span>[ ACCESS DIGITAL MENU ]</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </a>
+                        <a href="https://maps.google.com/?q=1+Rustlings+Rd,+Sheffield+S11+7AA" target="_blank" rel="noopener" onclick="playAudio('click')" class="px-7 py-4 rounded-xl glass-panel text-white font-mono font-medium text-sm tracking-wider uppercase flex items-center gap-3 hover:border-white/30 transition-all hover:bg-white/5">
+                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <span>LAUNCH MAP HUD</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Visual Focus Terminal / Dynamic Graphic -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Neon backdrop aura -->
+                        <div id="hero-glow-aura" class="absolute -inset-4 rounded-3xl dynamic-bg-accent opacity-20 blur-3xl transition-all duration-700"></div>
+                        
+                        <!-- Terminal Visual Container -->
+                        <div class="relative rounded-2xl glass-panel p-6 border border-white/15 shadow-2xl overflow-hidden scanline-container">
+                            <!-- Terminal Header Bar -->
+                            <div class="flex items-center justify-between pb-4 border-b border-white/10 font-mono text-xs text-gray-400 mb-6">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                    <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                                    <span class="ml-2 text-gray-500 text-[10px]">TERMINAL_V2.8</span>
+                                </div>
+                                <div id="terminal-mode-indicator" class="dynamic-accent font-bold">STATE: ESPRESSO</div>
+                            </div>
+
+                            <!-- Dynamic Visual Display Graphic -->
+                            <div class="relative h-64 rounded-xl bg-black/80 border border-white/10 flex flex-col items-center justify-center p-6 text-center overflow-hidden group">
+                                <div id="hero-interactive-badge" class="text-6xl mb-3 transform group-hover:scale-110 transition-transform duration-500">☕</div>
+                                <h3 id="hero-card-title" class="font-display text-2xl font-bold text-white uppercase tracking-wider">Ethiopia Guji Hambela</h3>
+                                <p id="hero-card-subtitle" class="font-mono text-xs dynamic-accent mt-1">Light Roast • Natural Process • Peach &amp; Jasmine Notes</p>
+
+                                <!-- Tech HUD Overlay lines inside preview -->
+                                <div class="absolute bottom-3 left-3 right-3 flex justify-between font-mono text-[10px] text-gray-500 border-t border-white/10 pt-2">
+                                    <span>TEMP: 93.4°C</span>
+                                    <span>PRESSURE: 9.0 BAR</span>
+                                    <span>EXTRACTION: 28s</span>
+                                </div>
+                            </div>
+
+                            <!-- Micro Specs Matrix -->
+                            <div class="grid grid-cols-2 gap-3 mt-4 font-mono text-xs">
+                                <div class="bg-black/40 p-2.5 rounded-lg border border-white/5">
+                                    <span class="text-gray-500 text-[10px] block">FLAVOUR INDEX</span>
+                                    <span id="spec-flavour" class="text-gray-200 font-medium">Stone Fruit, Floral</span>
+                                </div>
+                                <div class="bg-black/40 p-2.5 rounded-lg border border-white/5">
+                                    <span class="text-gray-500 text-[10px] block">CURRENT BATCH</span>
+                                    <span id="spec-origin" class="text-gray-200 font-medium">Roasted 3 Days Ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Interactive Menu Section -->
+    <section id="menu-matrix" class="py-20 relative z-10 border-t border-white/10 bg-black/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <div class="font-mono text-xs dynamic-accent uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <span>// DIGITALLY CATALOGUED</span>
+                        <span class="w-12 h-[1px] dynamic-bg-accent inline-block"></span>
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold uppercase text-white tracking-tight">
+                        THE BEVERAGE MATRIX
+                    </h2>
+                </div>
+
+                <!-- Matrix Category Filters -->
+                <div class="flex flex-wrap gap-2 font-mono text-xs bg-black/60 p-1.5 rounded-xl border border-white/10">
+                    <button onclick="filterMenu('all')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all bg-white/10 text-white" data-category="all">
+                        [ ALL ]
+                    </button>
+                    <button onclick="filterMenu('espresso')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="espresso">
+                        [ SPECIALITY ESPRESSO ]
+                    </button>
+                    <button onclick="filterMenu('lager')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="lager">
+                        [ CRAFT LAGERBIER ]
+                    </button>
+                    <button onclick="filterMenu('food')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="food">
+                        [ BAKERY &amp; FOOD ]
+                    </button>
+                </div>
+            </div>
+
+            <!-- Items Matrix Grid -->
+            <div id="menu-items-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will dynamically inject items here -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Live Review Matrix & Social Proof Engine -->
+    <section class="py-20 relative z-10 border-t border-white/10 cyber-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Rating Score Summary Card -->
+                <div class="lg:col-span-4 glass-panel p-8 rounded-2xl border border-white/10 space-y-6">
+                    <div class="font-mono text-xs dynamic-accent uppercase tracking-wider">// VERIFIED SOCIAL PROOF</div>
+                    <div>
+                        <div class="text-6xl font-display font-extrabold text-white flex items-baseline gap-3">
+                            4.9 <span class="text-3xl font-mono text-yellow-400">★ ★ ★ ★ ★</span>
+                        </div>
+                        <p class="text-sm font-mono text-gray-400 mt-2">Based on 18+ verified Google reviews in Sheffield, UK.</p>
+                    </div>
+
+                    <hr class="border-white/10">
+
+                    <!-- Attribute Highlights -->
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="flex justify-between items-center text-gray-300">
+                            <span>Coffee Precision</span>
+                            <span class="text-neon font-bold">100% positive</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-neon h-full w-[100%]"></div>
+                        </div>
+
+                        <div class="flex justify-between items-center text-gray-300 pt-2">
+                            <span>Lagerbier Selection</span>
+                            <span class="text-neon font-bold">98% positive</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-neon h-full w-[98%]"></div>
+                        </div>
+
+                        <div class="flex justify-between items-center text-gray-300 pt-2">
+                            <span>Endcliffe Park Atmosphere</span>
+                            <span class="text-neon font-bold">100% positive</span>
+                        </div>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                            <div class="bg-neon h-full w-[100%]"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="openReviewModal()" class="w-full py-3 rounded-xl border border-white/20 hover:border-white/40 font-mono text-xs uppercase tracking-wider text-white font-semibold transition-all bg-black/40 hover:bg-white/5">
+                        + SUBMIT VERIFIED TRANSMISSION
+                    </button>
+                </div>
+
+                <!-- Review Feed Filter & List -->
+                <div class="lg:col-span-8 space-y-6">
+                    <!-- Category Filter Buttons for Reviews -->
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <h3 class="font-display text-xl font-bold uppercase text-white">TESTIMONIAL TRANSMISSIONS</h3>
+                        <div class="flex gap-2 font-mono text-[11px]">
+                            <button onclick="filterReviews('all')" class="review-tag-btn px-3 py-1 rounded-md bg-white/10 text-white" data-tag="all">ALL</button>
+                            <button onclick="filterReviews('coffee')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="coffee">COFFEE</button>
+                            <button onclick="filterReviews('lager')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="lager">LAGER</button>
+                            <button onclick="filterReviews('vibes')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="vibes">VIBE</button>
+                        </div>
+                    </div>
+
+                    <!-- Reviews List Grid -->
+                    <div id="reviews-container" class="space-y-4">
+                        <!-- Javascript injects reviews here -->
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Geo-Terminal & Information Footer -->
+    <footer class="relative z-10 bg-black border-t border-white/10 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-white/10">
+                
+                <!-- Geo-Terminal Styled Map Display -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="font-mono text-xs dynamic-accent uppercase tracking-wider flex items-center justify-between">
+                        <span>// GEO-LOCATION TERMINAL</span>
+                        <span>PLUS CODE: 9F8V+J8</span>
+                    </div>
+
+                    <div class="relative h-64 rounded-2xl glass-panel border border-white/15 overflow-hidden flex items-center justify-center bg-obsidian group">
+                        <!-- Map Styling Background Placeholder/Mock Canvas -->
+                        <div class="absolute inset-0 bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px] opacity-60"></div>
+                        
+                        <!-- Radar Concentric Rings & Target Pulse -->
+                        <div class="relative z-10 flex flex-col items-center text-center p-6">
+                            <div class="relative mb-4">
+                                <div class="w-12 h-12 rounded-full dynamic-bg-accent opacity-20 animate-ping absolute inset-0"></div>
+                                <div class="w-12 h-12 rounded-full border border-white/40 glass-panel flex items-center justify-center relative z-10 shadow-lg">
+                                    <span class="text-xl">📍</span>
+                                </div>
+                            </div>
+                            <h4 class="font-display text-lg font-bold text-white uppercase">MANFRED'S HQ</h4>
+                            <p class="font-mono text-xs text-gray-300 mt-1">1 Rustlings Rd, Sheffield S11 7AA, UK</p>
+                            <p class="font-mono text-[11px] text-gray-500 mt-0.5">Opposite Endcliffe Park • Off Ecclesall Rd</p>
+                            
+                            <button onclick="copyAddressToClipboard()" class="mt-4 px-4 py-2 rounded-lg bg-black/80 border border-white/20 hover:border-white/50 text-xs font-mono text-gray-200 transition-all flex items-center gap-2 hover:bg-white/10">
+                                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+                                <span>COPY HUD ADDRESS</span>
+                            </button>
+                        </div>
+
+                        <!-- Map Grid Overlay Lines -->
+                        <div class="absolute top-2 left-2 font-mono text-[9px] text-gray-600">LAT: 53.3662 N</div>
+                        <div class="absolute bottom-2 right-2 font-mono text-[9px] text-gray-600">LNG: 1.5031 W</div>
+                    </div>
+                </div>
+
+                <!-- Service Status & Hours Grid -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="font-mono text-xs text-gray-400 uppercase tracking-wider">// SERVICE CAPABILITY MATRIX</div>
+
+                    <!-- Service Status Pills -->
+                    <div class="grid grid-cols-3 gap-3 font-mono text-xs">
+                        <div class="p-3 rounded-xl glass-panel border border-neon/30 text-center">
+                            <span class="block text-gray-400 text-[10px] uppercase">DINE-IN</span>
+                            <span class="text-neon font-bold">ONLINE</span>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel border border-neon/30 text-center">
+                            <span class="block text-gray-400 text-[10px] uppercase">TAKEOUT</span>
+                            <span class="text-neon font-bold">AVAILABLE</span>
+                        </div>
+                        <div class="p-3 rounded-xl glass-panel border border-red-500/30 text-center">
+                            <span class="block text-gray-400 text-[10px] uppercase">DELIVERY</span>
+                            <span class="text-red-400 font-bold">DISABLED</span>
+                        </div>
+                    </div>
+
+                    <!-- Hours Breakdown Table -->
+                    <div class="glass-panel p-5 rounded-xl border border-white/10 space-y-3 font-mono text-xs">
+                        <div class="flex justify-between items-center text-gray-300 pb-2 border-b border-white/5">
+                            <span class="font-semibold text-white">OPERATIONAL HOURS</span>
+                            <span class="text-neon">OPEN DAILY</span>
+                        </div>
+                        <div class="flex justify-between items-center text-gray-400">
+                            <span>Monday – Sunday</span>
+                            <span class="text-gray-200">08:00 AM – 08:00 PM</span>
+                        </div>
+                        <div class="flex justify-between items-center text-gray-400">
+                            <span>Day/Night Mode Shift</span>
+                            <span class="dynamic-accent">~ 04:00 PM DAILY</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-500 font-mono">
+                        *Note: Manfred's prioritises in-person atmosphere and tactile drink craftsmanship. Delivery services are intentionally disabled to preserve serving temperatures and foam integrity.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-gray-500 gap-4">
+                <div>
+                    © 2026 MANFRED'S CRAFT &amp; COFFEE LTD. ALL RIGHTS RESERVED.
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-gray-300 transition-colors">INSTAGRAM</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">UNTAPPD</a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">PRIVACY HUD</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Order Tray Sidebar Drawer -->
+    <div id="order-tray-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-obsidian/95 backdrop-blur-2xl border-l border-white/15 z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-white/10 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg dynamic-bg-accent/20 border border-white/20 flex items-center justify-center text-lg">🛒</div>
+                <h3 class="font-display text-lg font-bold text-white uppercase tracking-wider">YOUR VIRTUAL TRAY</h3>
+            </div>
+            <button onclick="toggleOrderTray()" class="p-2 text-gray-400 hover:text-white font-mono text-xl">✕</button>
+        </div>
+
+        <!-- Price Tier Indicator Bar (£1-£10 Threshold) -->
+        <div class="p-4 bg-black/60 border-b border-white/10 font-mono text-xs">
+            <div class="flex justify-between text-gray-400 mb-1.5">
+                <span>LOCAL PRICE TIER METRIC</span>
+                <span id="tray-tier-text" class="text-white font-bold">£0.00 / £10 Threshold</span>
+            </div>
+            <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                <div id="tray-budget-bar" class="dynamic-bg-accent h-full w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+
+        <!-- Order Items List -->
+        <div id="tray-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Items populated dynamically -->
+        </div>
+
+        <!-- Drawer Footer & Summary -->
+        <div class="p-6 border-t border-white/10 bg-black/80 space-y-4">
+            <div class="space-y-1.5 font-mono text-xs">
+                <div class="flex justify-between text-gray-400">
+                    <span>SUBTOTAL</span>
+                    <span id="tray-subtotal" class="text-gray-200">£0.00</span>
+                </div>
+                <div class="flex justify-between text-gray-400">
+                    <span>ESTIMATED VAT (20%)</span>
+                    <span id="tray-vat" class="text-gray-200">£0.00</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-white/10">
+                    <span>TOTAL ESTIMATE</span>
+                    <span id="tray-total" class="dynamic-accent">£0.00</span>
+                </div>
+            </div>
+
+            <button onclick="checkoutReceipt()" class="w-full py-4 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-sm uppercase tracking-wider hover:opacity-95 transition-all shadow-lg">
+                GENERATE DIGITAL RECEIPT
+            </button>
+            <button onclick="clearTray()" class="w-full py-2 text-xs font-mono text-gray-500 hover:text-red-400 transition-colors">
+                CLEAR ALL ITEMS
+            </button>
+        </div>
+    </div>
+
+    <!-- Review Submission Modal Overlay -->
+    <div id="review-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel max-w-lg w-full rounded-2xl p-6 border border-white/15 space-y-4 relative">
+            <button onclick="closeReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-mono text-lg">✕</button>
+            
+            <div class="font-mono text-xs dynamic-accent uppercase">// TRANSMIT FEEDBACK</div>
+            <h3 class="font-display text-2xl font-bold text-white uppercase">SUBMIT GOOGLE REVIEW</h3>
+
+            <div class="space-y-3 font-mono text-xs">
+                <div>
+                    <label class="block text-gray-400 mb-1">YOUR CALLSIGN / NAME</label>
+                    <input id="rev-input-name" type="text" placeholder="e.g. Alex M." class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40">
+                </div>
+                <div>
+                    <label class="block text-gray-400 mb-1">BEVERAGE CATEGORY</label>
+                    <select id="rev-input-category" class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40">
+                        <option value="coffee">Speciality Coffee</option>
+                        <option value="lager">Craft Lagerbier</option>
+                        <option value="vibes">Atmosphere &amp; Location</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-400 mb-1">TRANSMISSION TEXT</label>
+                    <textarea id="rev-input-text" rows="3" placeholder="Share your experience at 1 Rustlings Rd..." class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40"></textarea>
+                </div>
+            </div>
+
+            <button onclick="submitReview()" class="w-full py-3 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider hover:opacity-90">
+                TRANSMIT TRANSMISSION
+            </button>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Engine -->
+    <script>
+        /* ==========================================================================
+           1. CORE DATA MATRIX (Menu Items & Reviews)
+           ========================================================================== */
+        const MENU_DATA = [
+            {
+                id: 'm1',
+                title: 'Ethiopia Guji Pour-Over',
+                category: 'espresso',
+                price: 4.20,
+                type: 'Coffee',
+                tags: ['Vegan', 'Single Origin', 'Light Roast'],
+                icon: '☕',
+                description: 'V60 manual brew featuring notes of white peach, jasmine floral aroma, and sparkling citric acidity.',
+                specs: { Sensory: 'Floral / Peach', Acidly: 85, Body: 45, Bitterness: 20 }
+            },
+            {
+                id: 'm2',
+                title: 'Flat White (Oat / Dairy)',
+                category: 'espresso',
+                price: 3.80,
+                type: 'Coffee',
+                tags: ['Local Roast', 'Organic Milk'],
+                icon: '🥛',
+                description: 'Double shot of house espresso micro-foamed with local Sheffield dairy or Minor Figures Oat milk.',
+                specs: { Sensory: 'Chocolate / Hazelnut', Acidly: 40, Body: 80, Bitterness: 35 }
+            },
+            {
+                id: 'm3',
+                title: 'Rothaus Tannenzäpfle Pilsner',
+                category: 'lager',
+                price: 5.50,
+                priceUnit: 'Pint',
+                type: 'Lagerbier',
+                abv: '5.1%',
+                tags: ['German Craft', 'Imported'],
+                icon: '🍺',
+                description: 'Legendary Black Forest pilsner. Crisp, clean, herbal hop aroma with balanced noble bitterness.',
+                specs: { Sensory: 'Crisp / Herbal Hop', Acidly: 20, Body: 60, Bitterness: 65 }
+            },
+            {
+                id: 'm4',
+                title: 'Augustiner Helles Lager',
+                category: 'lager',
+                price: 5.80,
+                priceUnit: 'Pint',
+                type: 'Lagerbier',
+                abv: '5.2%',
+                tags: ['Munich Classic', 'Draft'],
+                icon: '🍻',
+                description: 'Munich’s oldest brewery. Unbelievably smooth malt backbone with velvet carbonation.',
+                specs: { Sensory: 'Sweet Malt / Velvet', Acidly: 10, Body: 75, Bitterness: 30 }
+            },
+            {
+                id: 'm5',
+                title: 'Artisan Cardamom Buns',
+                category: 'food',
+                price: 3.60,
+                type: 'Bakery',
+                tags: ['Vegetarian', 'Baked Daily'],
+                icon: '🥐',
+                description: 'Freshly baked local sourdough bun infused with freshly crushed green cardamom and pearl sugar.',
+                specs: { Sensory: 'Spiced / Butter', Acidly: 0, Body: 90, Bitterness: 10 }
+            },
+            {
+                id: 'm6',
+                title: 'Endcliffe Vegan Toastie',
+                category: 'food',
+                price: 6.90,
+                type: 'Food',
+                tags: ['Vegan', 'Local Bread'],
+                icon: '🥪',
+                description: 'Artisan sourdough, cashew pesto, slow-roasted vine tomatoes, and aged vegan cheddar melt.',
+                specs: { Sensory: 'Savoury / Tangy', Acidly: 30, Body: 85, Bitterness: 15 }
+            }
+        ];
+
+        const INITIAL_REVIEWS = [
+            {
+                id: 'r1',
+                name: 'Dominic V.',
+                rating: 5,
+                category: 'coffee',
+                time: '2 days ago',
+                text: 'Best flat white near Endcliffe Park. The barista’s attention to water temperature and roast origin is unmatched in Sheffield.'
+            },
+            {
+                id: 'r2',
+                name: 'Sarah & Mark',
+                rating: 5,
+                category: 'lager',
+                time: '1 week ago',
+                text: 'Cozy spot for a daytime coffee that shifts perfectly into an evening craft lager. The Rothaus on tap is served at exact German cellar temp!'
+            },
+            {
+                id: 'r3',
+                name: 'Liam K.',
+                rating: 5,
+                category: 'vibes',
+                time: '3 weeks ago',
+                text: 'Impeccable local vibe right off Ecclesall Road. Brilliant glass front views of the park during autumn afternoon catchups.'
+            }
+        ];
+
+        /* ==========================================================================
+           2. STATE MANAGEMENT & GLOBALS
+           ========================================================================== */
+        let currentTheme = 'espresso'; // 'espresso' or 'lager'
+        let currentMenuCategory = 'all';
+        let currentReviewCategory = 'all';
+        let orderTray = [];
+        let reviewsList = [...INITIAL_REVIEWS];
+
+        /* ==========================================================================
+           3. WEB AUDIO API SYNTHESIZER (Tactile SFX)
+           ========================================================================== */
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playAudio(type) {
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    // Crisp Sci-Fi UI Click
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'toggle') {
+                    // Cyber Mode Shift Sound
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(currentTheme === 'espresso' ? 300 : 600, now);
+                    osc.frequency.exponentialRampToValueAtTime(currentTheme === 'espresso' ? 600 : 300, now + 0.15);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                } else if (type === 'add') {
+                    // Positive Item Add Chime
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.06); // E5
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
+                    osc.start(now);
+                    osc.stop(now + 0.15);
+                }
+            } catch (e) {
+                // Audio Context fallback silent
+            }
+        }
+
+        /* ==========================================================================
+           4. AMBIENT HTML5 CANVAS PARTICLE SYSTEM
+           ========================================================================== */
+        const canvas = document.getElementById('ambient-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 50;
+                this.radius = Math.random() * 2.5 + 0.5;
+                
+                if (currentTheme === 'espresso') {
+                    // Steam floating upwards slowly
+                    this.speedY = -(Math.random() * 0.8 + 0.2);
+                    this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                } else {
+                    // Carbonated Lager bubbles rising quickly
+                    this.speedY = -(Math.random() * 2.0 + 0.8);
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.7 + 0.2;
+                }
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+
+                if (this.y < -10) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                
+                if (currentTheme === 'espresso') {
+                    ctx.fillStyle = `rgba(230, 126, 34, ${this.opacity})`;
+                } else {
+                    ctx.fillStyle = `rgba(241, 196, 15, ${this.opacity})`;
+                }
+                
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 60; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* ==========================================================================
+           5. CYBER THEME DUAL MODE SWITCHER
+           ========================================================================== */
+        function switchThemeMode(mode) {
+            if (currentTheme === mode) return;
+            currentTheme = mode;
+            playAudio('toggle');
+
+            const body = document.body;
+            const btnEspresso = document.getElementById('btn-state-espresso');
+            const btnLager = document.getElementById('btn-state-lager');
+            const heroAccent = document.getElementById('hero-headline-accent');
+            const terminalIndicator = document.getElementById('terminal-mode-indicator');
+            const heroCardTitle = document.getElementById('hero-card-title');
+            const heroCardSub = document.getElementById('hero-card-subtitle');
+            const heroBadge = document.getElementById('hero-interactive-badge');
+            const brandLogoIcon = document.getElementById('brand-logo-icon');
+            const flavourSpec = document.getElementById('spec-flavour');
+
+            if (mode === 'lager') {
+                body.classList.add('lager-state');
+                
+                btnLager.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm";
+                btnEspresso.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white";
+
+                heroAccent.innerText = "CRAFT LAGERBIER";
+                terminalIndicator.innerText = "STATE: LAGERBIER";
+                terminalIndicator.className = "text-lager font-bold";
+                
+                heroCardTitle.innerText = "Rothaus Tannenzäpfle";
+                heroCardSub.innerText = "Imported Black Forest Pilsner • 5.1% ABV • Cellar Temp";
+                heroBadge.innerText = "🍺";
+                brandLogoIcon.innerText = "🍺";
+                flavourSpec.innerText = "Herbal Hop, Crisp Malt";
+
+                // Auto filter menu matrix to lager if currently showing all or espresso
+                filterMenu('lager');
+
+                showToast("SHIFTED TO LAGERBIER STATE [ NIGHT MODE ]");
+            } else {
+                body.classList.remove('lager-state');
+                
+                btnEspresso.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm";
+                btnLager.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white";
+
+                heroAccent.innerText = "SPECIALITY BEVERAGES";
+                terminalIndicator.innerText = "STATE: ESPRESSO";
+                terminalIndicator.className = "dynamic-accent font-bold";
+
+                heroCardTitle.innerText = "Ethiopia Guji Hambela";
+                heroCardSub.innerText = "Light Roast • Natural Process • Peach & Jasmine Notes";
+                heroBadge.innerText = "☕";
+                brandLogoIcon.innerText = "☕";
+                flavourSpec.innerText = "Stone Fruit, Floral";
+
+                filterMenu('espresso');
+
+                showToast("SHIFTED TO ESPRESSO STATE [ DAY MODE ]");
+            }
+
+            // Re-initialize particles to alter physics speed
+            initParticles();
+        }
+
+        /* ==========================================================================
+           6. REAL-TIME LIVE HUD CLOCK & OPERATIONAL CALCULATOR
+           ========================================================================== */
+        function updateHUDClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const timeString = `SHEFFIELD ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            document.getElementById('hud-time-display').innerText = timeString;
+
+            // Operational check (08:00 to 20:00 Daily)
+            const openHour = 8;
+            const closeHour = 20;
+
+            const isOpen = hours >= openHour && hours < closeHour;
+            const statusDot = document.getElementById('hud-status-dot');
+            const statusText = document.getElementById('hud-status-text');
+
+            if (isOpen) {
+                const remainingHours = closeHour - 1 - hours;
+                const remainingMins = 59 - minutes;
+                statusText.innerText = `[ 🟢 OPERATIONAL - CLOSES IN ${remainingHours}h ${remainingMins}m ]`;
+                statusDot.className = "w-2.5 h-2.5 rounded-full bg-neon animate-pulse";
+            } else {
+                statusText.innerText = `[ 🔴 OFF-LINE - OPENS AT 08:00 AM ]`;
+                statusDot.className = "w-2.5 h-2.5 rounded-full bg-red-500";
+            }
+        }
+        setInterval(updateHUDClock, 1000);
+        updateHUDClock();
+
+        /* ==========================================================================
+           7. DYNAMIC MENU RENDERER & FILTER ENGINE
+           ========================================================================== */
+        function renderMenu() {
+            const grid = document.getElementById('menu-items-grid');
+            grid.innerHTML = '';
+
+            const filtered = currentMenuCategory === 'all' 
+                ? MENU_DATA 
+                : MENU_DATA.filter(item => item.category === currentMenuCategory);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl p-6 relative flex flex-col justify-between group";
+                
+                const tagsHTML = item.tags.map(t => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300">${t}</span>`).join(' ');
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Card Header Top Bar -->
+                        <div class="flex items-start justify-between gap-4 mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-xl bg-black/60 border border-white/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                                    ${item.icon}
+                                </div>
+                                <div>
+                                    <span class="font-mono text-[10px] text-gray-400 uppercase tracking-wider">${item.type} ${item.abv ? `• ${item.abv}` : ''}</span>
+                                    <h3 class="font-display text-lg font-bold text-white group-hover:text-amber-400 transition-colors">${item.title}</h3>
+                                </div>
+                            </div>
+                            <div class="font-mono text-lg font-extrabold dynamic-accent">
+                                £${item.price.toFixed(2)}
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-gray-300 font-sans mb-4 leading-relaxed">${item.description}</p>
+
+                        <!-- Tags Row -->
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            ${tagsHTML}
+                        </div>
+
+                        <!-- Sensory Sliders HUD -->
+                        <div class="space-y-1.5 font-mono text-[10px] bg-black/40 p-3 rounded-lg border border-white/5 mb-6">
+                            <div class="flex justify-between text-gray-400">
+                                <span>FLAVOUR PROFILE: ${item.specs.Sensory}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-12 text-gray-500">BODY</span>
+                                <div class="flex-1 bg-white/10 h-1 rounded-full overflow-hidden">
+                                    <div class="dynamic-bg-accent h-full" style="width: ${item.specs.Body}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Tray Button -->
+                    <button onclick="addToTray('${item.id}')" class="w-full py-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/30 dynamic-accent font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 group-hover:bg-white/10">
+                        <span>+ ADD TO VIRTUAL TRAY</span>
+                    </button>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function filterMenu(category) {
+            currentMenuCategory = category;
+            playAudio('click');
+
+            document.querySelectorAll('.menu-filter-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.className = "menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all bg-white/10 text-white shadow-sm border border-white/20";
+                } else {
+                    btn.className = "menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white";
+                }
+            });
+
+            renderMenu();
+        }
+
+        /* ==========================================================================
+           8. VIRTUAL ORDER TRAY & BUDGET ESTIMATOR (£1-10 Threshold)
+           ========================================================================== */
+        function toggleOrderTray() {
+            playAudio('click');
+            const drawer = document.getElementById('order-tray-drawer');
+            drawer.classList.toggle('translate-x-full');
+        }
+
+        function addToTray(itemId) {
+            const item = MENU_DATA.find(i => i.id === itemId);
+            if (!item) return;
+
+            playAudio('add');
+            
+            const existing = orderTray.find(i => i.id === itemId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                orderTray.push({ ...item, quantity: 1 });
+            }
+
+            updateTrayUI();
+            showToast(`ADDED: ${item.title}`);
+        }
+
+        function removeFromTray(itemId) {
+            playAudio('click');
+            const index = orderTray.findIndex(i => i.id === itemId);
+            if (index > -1) {
+                if (orderTray[index].quantity > 1) {
+                    orderTray[index].quantity -= 1;
+                } else {
+                    orderTray.splice(index, 1);
+                }
+            }
+            updateTrayUI();
+        }
+
+        function clearTray() {
+            playAudio('click');
+            orderTray = [];
+            updateTrayUI();
+            showToast("VIRTUAL TRAY CLEARED");
+        }
+
+        function updateTrayUI() {
+            const container = document.getElementById('tray-items-container');
+            const badge = document.getElementById('tray-count-badge');
+            const subtotalEl = document.getElementById('tray-subtotal');
+            const vatEl = document.getElementById('tray-vat');
+            const totalEl = document.getElementById('tray-total');
+            const budgetBar = document.getElementById('tray-budget-bar');
+            const tierText = document.getElementById('tray-tier-text');
+
+            const totalCount = orderTray.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalCount;
+
+            const subtotal = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const vat = subtotal * 0.20;
+            const total = subtotal;
+
+            subtotalEl.innerText = `£${(subtotal - vat).toFixed(2)}`;
+            vatEl.innerText = `£${vat.toFixed(2)}`;
+            totalEl.innerText = `£${total.toFixed(2)}`;
+
+            // Budget tier meter (£1 - £10 typical spending threshold)
+            const maxThreshold = 10.00;
+            const percentage = Math.min((total / maxThreshold) * 100, 100);
+            budgetBar.style.width = `${percentage}%`;
+
+            if (total <= maxThreshold) {
+                tierText.innerText = `£${total.toFixed(2)} / £10.00 (Standard Tier)`;
+                tierText.className = "text-neon font-bold";
+            } else {
+                tierText.innerText = `£${total.toFixed(2)} (Premium Group Order)`;
+                tierText.className = "text-yellow-400 font-bold";
+            }
+
+            if (orderTray.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-500 font-mono text-xs">
+                        <div class="text-4xl mb-3">🛒</div>
+                        <p>YOUR VIRTUAL TRAY IS EMPTY</p>
+                        <p class="text-[10px] text-gray-600 mt-1">Select items from the matrix to build your digital order estimate.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = orderTray.map(item => `
+                <div class="flex items-center justify-between p-3 rounded-xl glass-card border border-white/5 font-mono text-xs">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg">${item.icon}</span>
+                        <div>
+                            <div class="font-bold text-white">${item.title}</div>
+                            <div class="text-[10px] text-gray-400">£${item.price.toFixed(2)} each</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="removeFromTray('${item.id}')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold">-</button>
+                        <span class="w-4 text-center text-white font-bold">${item.quantity}</span>
+                        <button onclick="addToTray('${item.id}')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkoutReceipt() {
+            if (orderTray.length === 0) {
+                showToast("TRAY IS EMPTY - ADD ITEMS FIRST");
+                return;
+            }
+            playAudio('click');
+            const total = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            showToast(`RECEIPT GENERATED: £${total.toFixed(2)} // SHOW AT BAR`);
+        }
+
+        /* ==========================================================================
+           9. REVIEWS ENGINE & FEEDBACK MODAL
+           ========================================================================== */
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = '';
+
+            const filtered = currentReviewCategory === 'all'
+                ? reviewsList
+                : reviewsList.filter(r => r.category === currentReviewCategory);
+
+            filtered.forEach(rev => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-5 rounded-xl border border-white/5 space-y-2 font-mono text-xs";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-white text-sm">${rev.name}</span>
+                        <span class="text-yellow-400">★ ★ ★ ★ ★</span>
+                    </div>
+                    <p class="text-gray-300 font-sans text-xs leading-relaxed">"${rev.text}"</p>
+                    <div class="flex justify-between text-[10px] text-gray-500 pt-1">
+                        <span>TAG: ${rev.category.toUpperCase()}</span>
+                        <span>${rev.time}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterReviews(tag) {
+            currentReviewCategory = tag;
+            playAudio('click');
+
+            document.querySelectorAll('.review-tag-btn').forEach(btn => {
+                if (btn.dataset.tag === tag) {
+                    btn.className = "review-tag-btn px-3 py-1 rounded-md bg-white/10 text-white font-bold";
+                } else {
+                    btn.className = "review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white";
+                }
+            });
+
+            renderReviews();
+        }
+
+        function openReviewModal() {
+            playAudio('click');
+            document.getElementById('review-modal').classList.remove('hidden');
+        }
+
+        function closeReviewModal() {
+            playAudio('click');
+            document.getElementById('review-modal').classList.add('hidden');
+        }
+
+        function submitReview() {
+            const name = document.getElementById('rev-input-name').value.trim();
+            const category = document.getElementById('rev-input-category').value;
+            const text = document.getElementById('rev-input-text').value.trim();
+
+            if (!name || !text) {
+                showToast("PLEASE FILL ALL TRANSMISSION FIELDS");
+                return;
+            }
+
+            reviewsList.unshift({
+                id: 'r_' + Date.now(),
+                name: name,
+                rating: 5,
+                category: category,
+                time: 'Just now',
+                text: text
+            });
+
+            closeReviewModal();
+            renderReviews();
+            showToast("TRANSMISSION RECEIVED // THANK YOU!");
+
+            // Clear inputs
+            document.getElementById('rev-input-name').value = '';
+            document.getElementById('rev-input-text').value = '';
+        }
+
+        /* ==========================================================================
+           10. UTILITY SYSTEM (Toast notifications & Address copy)
+           ========================================================================== */
+        function copyAddressToClipboard() {
+            playAudio('click');
+            const addressText = "1 Rustlings Rd, Sheffield S11 7AA, United Kingdom";
+            
+            const tempInput = document.createElement("input");
+            tempInput.value = addressText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast("COPIED TO HUD CLIPBOARD!");
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = "glass-panel px-4 py-3 rounded-xl border border-white/20 dynamic-accent font-mono text-xs font-bold shadow-2xl flex items-center gap-2 transform translate-x-10 opacity-0 transition-all duration-300";
+            toast.innerHTML = `<span>⚡</span> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.classList.remove('translate-x-10', 'opacity-0');
+            }, 10);
+
+            // Animate out & remove
+            setTimeout(() => {
+                toast.classList.add('translate-x-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        /* Initial Execution on Load */
+        window.onload = function() {
+            renderMenu();
+            renderReviews();
+            updateTrayUI();
+        };
+    </script>
+</body>
+</html>
