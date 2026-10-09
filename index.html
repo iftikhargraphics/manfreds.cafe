@@ -1,1270 +1,3113 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MANFRED'S // Speciality Coffee & Craft Lagerbier</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        obsidian: '#0D0F12',
-                        'obsidian-card': 'rgba(22, 26, 33, 0.75)',
-                        'obsidian-border': 'rgba(255, 255, 255, 0.08)',
-                        coffee: '#E67E22',
-                        'coffee-glow': 'rgba(230, 126, 34, 0.4)',
-                        lager: '#F1C40F',
-                        'lager-glow': 'rgba(241, 196, 15, 0.4)',
-                        neon: '#00FF87',
-                        'neon-glow': 'rgba(0, 255, 135, 0.3)',
-                    },
-                    fontFamily: {
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        display: ['Syne', 'sans-serif'],
-                    },
-                    animation: {
-                        'pulse-glow': 'pulseGlow 2s infinite ease-in-out',
-                        'scanline': 'scanline 8s linear infinite',
-                        'radar-pulse': 'radarPulse 2s infinite ease-out',
-                    },
-                    keyframes: {
-                        pulseGlow: {
-                            '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
-                            '50%': { opacity: 0.8, transform: 'scale(1.03)' },
-                        },
-                        scanline: {
-                            '0%': { transform: 'translateY(-100%)' },
-                            '100%': { transform: 'translateY(1000%)' }
-                        },
-                        radarPulse: {
-                            '0%': { transform: 'scale(0.8)', opacity: 1 },
-                            '100%': { transform: 'scale(2.5)', opacity: 0 }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0D0F12; }
-        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #E67E22; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0C0A08" />
+<title>Manfred's — Speciality Coffee &amp; Lagerbier · Sheffield S11</title>
+<meta name="description" content="A dual-purpose room on the edge of Endcliffe Park. Single-origin espresso by day, cold-fermented lagerbier by night. 1 Rustlings Rd, Sheffield S11 7AA." />
 
-        /* Theme state transition variables */
-        :root {
-            --accent-color: #E67E22;
-            --accent-glow: rgba(230, 126, 34, 0.35);
-            --accent-border: rgba(230, 126, 34, 0.5);
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        body.lager-state {
-            --accent-color: #F1C40F;
-            --accent-glow: rgba(241, 196, 15, 0.35);
-            --accent-border: rgba(241, 196, 15, 0.5);
-        }
+<style>
+/* ============================================================
+   MANFRED'S — REFINED EDITORIAL SYSTEM
+   ============================================================ */
 
-        .dynamic-accent { color: var(--accent-color); }
-        .dynamic-bg-accent { background-color: var(--accent-color); }
-        .dynamic-border-accent { border-color: var(--accent-border); }
-        .dynamic-shadow-glow { box-shadow: 0 0 25px var(--accent-glow); }
-        .dynamic-text-glow { text-shadow: 0 0 12px var(--accent-glow); }
+:root{
+  /* Surface */
+  --bg:#0C0A08;
+  --bg-2:#11100D;
+  --bg-3:#16140F;
+  --surface:rgba(26,22,18,0.62);
+  --surface-solid:#16140F;
+  --line:rgba(240,234,224,0.09);
+  --line-2:rgba(240,234,224,0.16);
+  --line-3:rgba(240,234,224,0.28);
 
-        /* Cyber grid overlay */
-        .cyber-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
+  /* Text */
+  --text:#F0EAE0;
+  --text-2:#B5ACA0;
+  --text-3:#807A72;
+  --muted:#5C5650;
 
-        /* Glassmorphism effects */
-        .glass-panel {
-            background: rgba(22, 26, 33, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+  /* Accent (mode driven) */
+  --accent:#C4864C;
+  --accent-rgb:196,134,76;
+  --accent-soft:rgba(196,134,76,0.10);
+  --accent-2:#E0A468;
 
-        .glass-card {
-            background: rgba(18, 22, 28, 0.65);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  /* Status */
+  --green:#8FCB8F;
+  --red:#D97A6C;
 
-        .glass-card:hover {
-            border-color: var(--accent-border);
-            box-shadow: 0 8px 32px var(--accent-glow);
-            transform: translateY(-3px);
-        }
+  /* Type */
+  --serif:'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, Menlo, monospace;
 
-        /* Scanline effect overlay */
-        .scanline-container {
-            position: relative;
-            overflow: hidden;
-        }
-        .scanline-container::after {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            background-size: 100% 4px;
-            z-index: 20;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-    </style>
+  /* Metrics */
+  --maxw:1320px;
+  --pad:32px;
+  --radius:4px;
+  --radius-lg:6px;
+
+  /* Motion */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+
+body[data-mode="lager"]{
+  --accent:#D4B65E;
+  --accent-rgb:212,182,94;
+  --accent-soft:rgba(212,182,94,0.10);
+  --accent-2:#E7CE85;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:100px;-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  transition:background-color .8s var(--ease);
+}
+
+img,iframe{display:block;max-width:100%;}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;padding:0;}
+a{color:inherit;text-decoration:none;}
+ul,ol,dl,dd,figure,blockquote{margin:0;padding:0;list-style:none;}
+h1,h2,h3,h4,p{margin:0;}
+
+::selection{background:rgba(var(--accent-rgb),.28);color:#fff;}
+
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(var(--accent-rgb),.28);border-radius:8px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(var(--accent-rgb),.55);}
+
+/* ============================================================
+   AMBIENT
+   ============================================================ */
+.ambient{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  transition:opacity 1.2s var(--ease);
+}
+.ambient-a{
+  background:
+    radial-gradient(60vw 55vw at 15% 0%, rgba(var(--accent-rgb),.14), transparent 62%),
+    radial-gradient(50vw 45vw at 90% 100%, rgba(var(--accent-rgb),.09), transparent 65%);
+  opacity:1;
+}
+body[data-mode="lager"] .ambient-a{
+  background:
+    radial-gradient(60vw 55vw at 85% 0%, rgba(var(--accent-rgb),.13), transparent 62%),
+    radial-gradient(50vw 45vw at 10% 100%, rgba(var(--accent-rgb),.08), transparent 65%);
+}
+.grain{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.028;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#fx{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:.5;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.serif{font-family:var(--serif);font-optical-sizing:auto;}
+.mono{font-family:var(--mono);}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:400;
+}
+.eyebrow::before{
+  content:'';
+  width:20px;height:1px;
+  background:var(--accent);
+  display:inline-block;
+}
+
+.display{
+  font-family:var(--serif);
+  font-weight:300;
+  font-optical-sizing:auto;
+  letter-spacing:-.025em;
+  line-height:.98;
+}
+.display em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent);
+  transition:color .7s var(--ease);
+}
+
+.wrap{
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-inline:var(--pad);
+}
+@media (max-width:720px){ .wrap{padding-inline:22px;} }
+
+section{position:relative;}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:80px;
+  display:flex;align-items:center;
+  gap:24px;
+  padding:0 var(--pad);
+  background:rgba(12,10,8,0);
+  transition:background .5s var(--ease), height .4s var(--ease), border-color .5s var(--ease), backdrop-filter .5s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  height:68px;
+  background:rgba(12,10,8,.78);
+  backdrop-filter:blur(20px) saturate(160%);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  border-bottom-color:var(--line);
+}
+@media (max-width:720px){ .nav{padding:0 22px;height:70px;} .nav.scrolled{height:62px;} }
+
+.logo{
+  display:flex;align-items:baseline;gap:10px;
+  flex-shrink:0;
+  transition:opacity .3s;
+}
+.logo:hover{opacity:.8;}
+.logo-mark{
+  font-family:var(--serif);
+  font-weight:400;
+  font-style:italic;
+  font-size:24px;
+  letter-spacing:-.02em;
+  color:var(--text);
+  line-height:1;
+}
+.logo-mark::after{
+  content:'.';
+  color:var(--accent);
+  transition:color .6s var(--ease);
+}
+.logo-sub{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  padding-left:10px;
+  border-left:1px solid var(--line-2);
+  display:none;
+}
+@media (min-width:820px){ .logo-sub{display:block;} }
+
+.nav-links{
+  display:flex;gap:2px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.nav-links a{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  padding:10px 16px;
+  color:var(--text-2);
+  position:relative;
+  transition:color .3s var(--ease);
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  left:16px;right:16px;bottom:6px;
+  height:1px;
+  background:var(--accent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .4s var(--ease-out);
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a:hover::after{transform:scaleX(1);}
+@media (max-width:920px){ .nav-links{display:none;} }
+
+.nav-right{
+  display:flex;align-items:center;gap:14px;
+  margin-left:auto;
+  flex-shrink:0;
+}
+@media (min-width:921px){ .nav-right{margin-left:0;} }
+
+.status-pill{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-2);
+  padding:8px 14px 8px 12px;
+  border:1px solid var(--line-2);
+  border-radius:999px;
+  transition:border-color .4s var(--ease), color .3s;
+  white-space:nowrap;
+}
+.status-pill .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 0 rgba(143,203,143,.6);
+  animation:pulse 2.4s var(--ease-out) infinite;
+  flex-shrink:0;
+}
+.status-pill.closed .dot{
+  background:var(--red);
+  animation:none;
+  box-shadow:0 0 8px rgba(217,122,108,.9);
+}
+.status-pill.closed{border-color:rgba(217,122,108,.28);}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(143,203,143,.6);}
+  70%{box-shadow:0 0 0 8px rgba(143,203,143,0);}
+  100%{box-shadow:0 0 0 0 rgba(143,203,143,0);}
+}
+@media (max-width:880px){ .status-pill .label{display:none;} .status-pill{padding:10px;} }
+
+.nav-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;
+  border-radius:999px;
+  background:var(--text);
+  color:var(--bg);
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:transform .3s var(--ease-out), background .3s, box-shadow .3s;
+  white-space:nowrap;
+}
+.nav-cta:hover{
+  transform:translateY(-1px);
+  background:var(--accent);
+  box-shadow:0 12px 30px -12px rgba(var(--accent-rgb),.7);
+}
+@media (max-width:600px){ .nav-cta{padding:10px 16px;font-size:10px;} }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  padding:160px 0 0;
+  overflow:hidden;
+}
+@media (max-width:720px){ .hero{padding-top:120px;} }
+
+.hero-media{
+  position:absolute;inset:0;
+  z-index:0;
+}
+.hero-media img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.06);
+  transition:opacity 1.4s var(--ease), transform 2.4s var(--ease-out);
+  will-change:opacity, transform;
+}
+.hero-media img.active{opacity:1;transform:scale(1);}
+.hero-media::after{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(12,10,8,.55) 0%, rgba(12,10,8,.25) 30%, rgba(12,10,8,.85) 78%, var(--bg) 100%),
+    linear-gradient(90deg, rgba(12,10,8,.55) 0%, rgba(12,10,8,0) 55%);
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:0 var(--pad);
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding-bottom:56px;
+}
+@media (max-width:720px){ .hero-content{padding-inline:22px;padding-bottom:40px;} }
+
+.hero-title{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(52px, 8.4vw, 128px);
+  line-height:.94;
+  letter-spacing:-.035em;
+  max-width:16ch;
+  margin-top:26px;
+}
+.hero-title em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent);
+  transition:color .7s var(--ease);
+}
+
+.hero-lede{
+  margin-top:26px;
+  max-width:52ch;
+  font-size:17px;
+  line-height:1.6;
+  color:var(--text-2);
+  font-weight:300;
+}
+.hero-lede strong{color:var(--text);font-weight:500;}
+
+.hero-actions{
+  margin-top:38px;
+  display:flex;flex-wrap:wrap;gap:12px;
+  align-items:center;
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 28px;
+  border-radius:999px;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:all .35s var(--ease-out);
+  white-space:nowrap;
+  cursor:pointer;
+}
+.btn svg{width:13px;height:13px;transition:transform .35s var(--ease-out);}
+
+.btn-solid{
+  background:var(--text);
+  color:var(--bg);
+}
+.btn-solid:hover{
+  background:var(--accent);
+  color:var(--bg);
+  transform:translateY(-2px);
+  box-shadow:0 16px 40px -14px rgba(var(--accent-rgb),.75);
+}
+.btn-solid:hover svg{transform:translateX(3px);}
+
+.btn-outline{
+  border:1px solid var(--line-2);
+  color:var(--text);
+  background:rgba(12,10,8,.35);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.btn-outline:hover{
+  border-color:var(--text);
+  background:rgba(240,234,224,.05);
+  transform:translateY(-2px);
+}
+.btn-outline:hover svg{transform:translate(2px,-2px);}
+
+/* Mode switch */
+.mode-switch{
+  display:inline-flex;
+  align-items:center;
+  padding:4px;
+  border:1px solid var(--line-2);
+  border-radius:999px;
+  background:rgba(12,10,8,.5);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  position:relative;
+  margin-left:12px;
+}
+@media (max-width:720px){ .mode-switch{margin-left:0;margin-top:8px;} }
+.mode-switch .indicator{
+  position:absolute;
+  top:4px;left:4px;
+  width:calc(50% - 4px);
+  height:calc(100% - 8px);
+  border-radius:999px;
+  background:var(--accent);
+  box-shadow:0 8px 22px -8px rgba(var(--accent-rgb),.85);
+  transition:transform .48s var(--ease-out), background .7s var(--ease);
+  pointer-events:none;
+}
+body[data-mode="lager"] .mode-switch .indicator{transform:translateX(100%);}
+.mode-switch button{
+  position:relative;z-index:1;
+  padding:10px 18px;
+  border-radius:999px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-2);
+  transition:color .35s var(--ease);
+  white-space:nowrap;
+  min-width:104px;
+}
+.mode-switch button[aria-selected="true"]{color:#1A1206;font-weight:600;}
+.mode-switch button:hover{color:var(--text);}
+.mode-switch button[aria-selected="true"]:hover{color:#1A1206;}
+@media (max-width:520px){
+  .mode-switch button{padding:9px 12px;font-size:10px;min-width:0;}
+}
+
+/* Hero footer */
+.hero-foot{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding:22px var(--pad) 28px;
+  display:flex;justify-content:space-between;
+  gap:32px;flex-wrap:wrap;
+  border-top:1px solid var(--line);
+}
+@media (max-width:720px){ .hero-foot{padding-inline:22px;gap:16px;} }
+.hero-stat{
+  display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.1em;
+  color:var(--text-2);
+}
+.hero-stat b{color:var(--text);font-weight:500;}
+.hero-stat .star{color:#E5B85C;}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:18px 0;
+  overflow:hidden;
+  background:rgba(12,10,8,.4);
+  mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ticker-track{
+  display:flex;gap:48px;width:max-content;
+  animation:tick 52s linear infinite;
+}
+.ticker-track span{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  display:flex;align-items:center;gap:48px;
+  white-space:nowrap;
+}
+.ticker-track span::after{
+  content:'◆';
+  color:rgba(var(--accent-rgb),.55);
+  font-size:8px;
+}
+@keyframes tick{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ============================================================
+   STORY
+   ============================================================ */
+.story{padding:140px 0;}
+@media (max-width:720px){ .story{padding:80px 0;} }
+
+.story-grid{
+  display:grid;
+  grid-template-columns:1fr 1.05fr;
+  gap:80px;
+  align-items:center;
+}
+@media (max-width:960px){ .story-grid{grid-template-columns:1fr;gap:48px;} }
+
+.story-media{
+  position:relative;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  border-radius:var(--radius-lg);
+  background:var(--bg-3);
+}
+.story-media img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 1.6s var(--ease-out);
+}
+.story-media:hover img{transform:scale(1.04);}
+.story-media::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(12,10,8,0) 55%, rgba(12,10,8,.5) 100%);
+  pointer-events:none;
+}
+.story-media-caption{
+  position:absolute;
+  left:22px;bottom:22px;right:22px;
+  z-index:1;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-2);
+  display:flex;justify-content:space-between;gap:16px;
+  padding-top:14px;
+  border-top:1px solid rgba(240,234,224,.18);
+}
+
+.story-copy h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(34px, 4.4vw, 58px);
+  line-height:1.06;
+  letter-spacing:-.025em;
+  margin-top:22px;
+}
+.story-copy h2 em{font-style:italic;font-weight:400;color:var(--accent);transition:color .7s var(--ease);}
+.story-copy p{
+  margin-top:22px;
+  color:var(--text-2);
+  font-size:16px;
+  line-height:1.72;
+  max-width:52ch;
+  font-weight:300;
+}
+.story-copy p + p{margin-top:16px;}
+
+.story-meta{
+  margin-top:44px;
+  padding-top:32px;
+  border-top:1px solid var(--line);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+}
+@media (max-width:520px){ .story-meta{grid-template-columns:1fr 1fr;gap:24px;} }
+.story-meta dt{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  margin-bottom:8px;
+}
+.story-meta dd{
+  font-family:var(--serif);
+  font-size:26px;
+  font-weight:300;
+  letter-spacing:-.02em;
+  color:var(--text);
+  line-height:1.1;
+}
+.story-meta dd em{font-style:italic;color:var(--accent);transition:color .7s var(--ease);}
+
+/* ============================================================
+   MENU
+   ============================================================ */
+.menu{padding:140px 0;border-top:1px solid var(--line);}
+@media (max-width:720px){ .menu{padding:80px 0;} }
+
+.menu-head{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  align-items:end;
+  margin-bottom:60px;
+}
+@media (max-width:900px){ .menu-head{grid-template-columns:1fr;gap:28px;} }
+
+.menu-head h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(38px, 5.2vw, 72px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin-top:22px;
+}
+.menu-head h2 em{font-style:italic;font-weight:400;color:var(--accent);transition:color .7s var(--ease);}
+.menu-head p{
+  color:var(--text-2);
+  font-size:15.5px;
+  line-height:1.7;
+  font-weight:300;
+  max-width:44ch;
+}
+
+.filters{
+  display:flex;flex-wrap:wrap;gap:6px;
+  padding:6px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(22,18,14,.4);
+  width:max-content;
+  max-width:100%;
+  margin-bottom:52px;
+}
+.filter-btn{
+  padding:11px 20px;
+  border-radius:999px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  transition:color .35s var(--ease), background .35s var(--ease);
+  white-space:nowrap;
+}
+.filter-btn:hover{color:var(--text);}
+.filter-btn.active{
+  background:var(--text);
+  color:var(--bg);
+}
+.filter-btn .count{
+  display:inline-block;
+  margin-left:6px;
+  font-size:9.5px;
+  opacity:.6;
+}
+@media (max-width:600px){
+  .filters{width:100%;flex-wrap:nowrap;overflow-x:auto;border-radius:12px;}
+  .filters::-webkit-scrollbar{display:none;}
+  .filter-btn{padding:10px 14px;font-size:10px;}
+}
+
+/* Featured */
+.featured{
+  display:grid;
+  grid-template-columns:1.15fr 1fr;
+  gap:60px;
+  align-items:center;
+  margin-bottom:72px;
+  padding-bottom:72px;
+  border-bottom:1px solid var(--line);
+}
+@media (max-width:900px){ .featured{grid-template-columns:1fr;gap:32px;padding-bottom:48px;margin-bottom:48px;} }
+
+.featured-media{
+  position:relative;
+  aspect-ratio:16/11;
+  overflow:hidden;
+  border-radius:var(--radius-lg);
+  background:var(--bg-3);
+}
+.featured-media img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;
+  transform:scale(1.05);
+  transition:opacity 1s var(--ease), transform 1.6s var(--ease-out);
+}
+.featured-media img.active{opacity:1;transform:scale(1);}
+.featured-tag{
+  position:absolute;top:18px;left:18px;
+  z-index:1;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(12,10,8,.75);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--line-2);
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-2);
+}
+
+.featured-info .cat{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent);
+  transition:color .7s var(--ease);
+}
+.featured-info h3{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(32px, 4vw, 52px);
+  line-height:1.04;
+  letter-spacing:-.025em;
+  margin-top:14px;
+}
+.featured-info h3 em{font-style:italic;font-weight:400;}
+.featured-info .desc{
+  margin-top:20px;
+  color:var(--text-2);
+  font-size:15.5px;
+  line-height:1.7;
+  max-width:44ch;
+  font-weight:300;
+  min-height:80px;
+}
+.featured-info .flavor{
+  margin-top:22px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.06em;
+  color:var(--text-2);
+  line-height:1.7;
+}
+.featured-info .flavor b{
+  color:var(--text-3);
+  font-weight:400;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:10px;
+  display:block;
+  margin-bottom:6px;
+}
+.featured-price{
+  margin-top:28px;
+  display:flex;align-items:baseline;gap:16px;
+}
+.featured-price .amt{
+  font-family:var(--serif);
+  font-size:40px;
+  font-weight:300;
+  letter-spacing:-.03em;
+  color:var(--text);
+}
+.featured-price .meta{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+
+/* Menu list */
+.menu-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0 64px;
+}
+@media (max-width:820px){ .menu-grid{grid-template-columns:1fr;gap:0;} }
+
+.menu-item{
+  padding:26px 0;
+  border-top:1px solid var(--line);
+  display:block;
+  transition:opacity .35s var(--ease);
+  cursor:pointer;
+}
+.menu-item.hidden{display:none;}
+.menu-item:hover{opacity:.92;}
+
+.menu-row{
+  display:flex;align-items:baseline;
+  gap:16px;
+  width:100%;
+}
+.menu-name{
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:-.015em;
+  color:var(--text);
+  line-height:1.2;
+  transition:color .3s;
+  flex-shrink:0;
+  max-width:75%;
+}
+.menu-item:hover .menu-name{color:var(--accent);}
+.menu-leader{
+  flex:1;
+  border-bottom:1px dotted rgba(240,234,224,.18);
+  transform:translateY(-4px);
+  min-width:20px;
+}
+.menu-price{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:.02em;
+  flex-shrink:0;
+}
+
+.menu-sub{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin-top:8px;
+  align-items:baseline;
+}
+.menu-desc{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--text-3);
+  font-weight:300;
+  max-width:56ch;
+}
+.menu-notes{
+  margin-top:10px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.05em;
+  color:rgba(var(--accent-rgb),.85);
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height .5s var(--ease-out), opacity .35s var(--ease), margin-top .4s var(--ease);
+}
+.menu-item:hover .menu-notes,
+.menu-item:focus-within .menu-notes{
+  max-height:60px;
+  opacity:1;
+  margin-top:12px;
+}
+.menu-tags{
+  display:flex;gap:6px;
+  flex-shrink:0;
+  margin-top:4px;
+}
+.menu-tag{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:999px;
+  border:1px solid var(--line-2);
+  color:var(--text-3);
+}
+.menu-tag.accent{
+  border-color:rgba(var(--accent-rgb),.35);
+  color:var(--accent);
+}
+
+.add-inline{
+  margin-left:auto;
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  padding:6px 12px;
+  border:1px solid var(--line-2);
+  border-radius:999px;
+  opacity:0;
+  transform:translateX(-6px);
+  transition:all .3s var(--ease-out);
+  flex-shrink:0;
+}
+.menu-item:hover .add-inline{opacity:1;transform:translateX(0);}
+.add-inline:hover{
+  color:var(--bg);
+  background:var(--accent);
+  border-color:var(--accent);
+}
+.add-inline.added{
+  opacity:1;transform:translateX(0);
+  background:var(--accent);
+  color:var(--bg);
+  border-color:var(--accent);
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery{padding:140px 0;border-top:1px solid var(--line);}
+@media (max-width:720px){ .gallery{padding:80px 0;} }
+
+.gallery-head{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:40px;flex-wrap:wrap;
+  margin-bottom:52px;
+}
+.gallery-head h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(34px, 4.6vw, 62px);
+  line-height:1.04;
+  letter-spacing:-.025em;
+  margin-top:20px;
+  max-width:16ch;
+}
+.gallery-head h2 em{font-style:italic;font-weight:400;color:var(--accent);transition:color .7s var(--ease);}
+.gallery-head p{
+  color:var(--text-2);font-size:15px;line-height:1.7;
+  max-width:34ch;font-weight:300;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:14px;
+}
+.g-item{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius-lg);
+  background:var(--bg-3);
+  cursor:pointer;
+}
+.g-item img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 1.4s var(--ease-out), filter .6s var(--ease);
+  filter:saturate(.92);
+}
+.g-item:hover img{transform:scale(1.05);filter:saturate(1.08);}
+.g-item::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, transparent 50%, rgba(12,10,8,.55) 100%);
+  opacity:0;
+  transition:opacity .5s var(--ease);
+  pointer-events:none;
+}
+.g-item:hover::after{opacity:1;}
+.g-item .g-cap{
+  position:absolute;left:18px;bottom:16px;right:18px;
+  z-index:1;
+  font-family:var(--mono);
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text);
+  opacity:0;transform:translateY(6px);
+  transition:all .4s var(--ease-out);
+}
+.g-item:hover .g-cap{opacity:1;transform:none;}
+
+.g-1{grid-column:span 5;aspect-ratio:4/5;}
+.g-2{grid-column:span 4;aspect-ratio:4/5;}
+.g-3{grid-column:span 3;aspect-ratio:4/5;}
+.g-4{grid-column:span 3;aspect-ratio:4/5;}
+.g-5{grid-column:span 4;aspect-ratio:4/5;}
+.g-6{grid-column:span 5;aspect-ratio:4/5;}
+
+@media (max-width:900px){
+  .gallery-grid{grid-template-columns:repeat(6, 1fr);gap:10px;}
+  .g-1,.g-2,.g-3,.g-4,.g-5,.g-6{grid-column:span 3;}
+}
+@media (max-width:520px){
+  .gallery-grid{grid-template-columns:1fr;gap:10px;}
+  .g-1,.g-2,.g-3,.g-4,.g-5,.g-6{grid-column:span 1;aspect-ratio:4/3;}
+}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+.reviews{padding:140px 0;border-top:1px solid var(--line);}
+@media (max-width:720px){ .reviews{padding:80px 0;} }
+
+.reviews-head{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:60px;
+  align-items:end;
+  margin-bottom:64px;
+}
+@media (max-width:900px){ .reviews-head{grid-template-columns:1fr;gap:32px;} }
+
+.rating-display{
+  display:flex;align-items:flex-end;gap:28px;
+  flex-wrap:wrap;
+}
+.rating-num{
+  font-family:var(--serif);
+  font-size:clamp(80px, 10vw, 132px);
+  font-weight:300;
+  line-height:.9;
+  letter-spacing:-.05em;
+  color:var(--text);
+}
+.rating-meta{
+  padding-bottom:18px;
+}
+.rating-stars{
+  display:flex;gap:4px;
+  margin-bottom:14px;
+}
+.rating-stars svg{
+  width:18px;height:18px;
+  fill:#E5B85C;
+}
+.rating-meta p{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  line-height:1.8;
+}
+.rating-meta p b{color:var(--text);font-weight:500;}
+
+.reviews-head-right h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(30px, 3.4vw, 44px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+  margin-bottom:22px;
+}
+.reviews-head-right h2 em{font-style:italic;color:var(--accent);transition:color .7s var(--ease);}
+
+.search-field{
+  position:relative;
+}
+.search-field svg{
+  position:absolute;
+  left:18px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;
+  color:var(--text-3);
+  pointer-events:none;
+}
+#reviewSearch{
+  width:100%;
+  padding:16px 18px 16px 46px;
+  border-radius:999px;
+  border:1px solid var(--line-2);
+  background:rgba(22,18,14,.5);
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.04em;
+  outline:none;
+  transition:border-color .3s var(--ease), background .3s;
+  -webkit-appearance:none;
+}
+#reviewSearch::placeholder{color:var(--text-3);}
+#reviewSearch:focus{
+  border-color:rgba(var(--accent-rgb),.55);
+  background:rgba(22,18,14,.7);
+}
+
+.quotes{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--line);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  margin-bottom:64px;
+}
+@media (max-width:820px){ .quotes{grid-template-columns:1fr;} }
+
+.quote{
+  padding:44px 34px;
+  background:var(--bg);
+  position:relative;
+  transition:background .4s var(--ease);
+}
+.quote:hover{background:rgba(22,18,14,.4);}
+.quote-mark{
+  font-family:var(--serif);
+  font-size:52px;
+  line-height:1;
+  color:var(--accent);
+  margin-bottom:16px;
+  font-style:italic;
+  transition:color .7s var(--ease);
+}
+.quote p{
+  font-family:var(--serif);
+  font-size:19px;
+  font-weight:300;
+  line-height:1.5;
+  letter-spacing:-.01em;
+  color:var(--text);
+}
+.quote cite{
+  display:block;
+  margin-top:22px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  font-style:normal;
+}
+
+.review-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1px;
+  background:var(--line);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+@media (max-width:900px){ .review-grid{grid-template-columns:repeat(2,1fr);} }
+@media (max-width:600px){ .review-grid{grid-template-columns:1fr;} }
+
+.review{
+  padding:34px 30px;
+  background:var(--bg);
+  transition:background .4s var(--ease);
+  animation:fadeUp .6s var(--ease-out) both;
+}
+.review:hover{background:rgba(22,18,14,.35);}
+.review.hidden{display:none;}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:none;}
+}
+
+.review-head{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:16px;
+}
+.review-avatar{
+  width:36px;height:36px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(var(--accent-rgb),.14);
+  border:1px solid rgba(var(--accent-rgb),.35);
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  color:var(--accent);
+  letter-spacing:.04em;
+  flex-shrink:0;
+  transition:background .7s var(--ease), color .7s var(--ease), border-color .7s var(--ease);
+}
+.review-name{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text);
+  letter-spacing:-.005em;
+}
+.review-date{
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  margin-top:2px;
+}
+.review-stars{
+  margin-left:auto;
+  display:flex;gap:2px;
+}
+.review-stars svg{width:10px;height:10px;fill:#E5B85C;}
+.review-stars svg.dim{fill:rgba(240,234,224,.15);}
+.review-body{
+  font-size:14.5px;
+  line-height:1.7;
+  color:var(--text-2);
+  font-weight:300;
+}
+.review-body mark{
+  background:rgba(var(--accent-rgb),.2);
+  color:var(--accent);
+  padding:1px 3px;
+  border-radius:2px;
+}
+.no-results{
+  grid-column:1/-1;
+  padding:80px 20px;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  background:var(--bg);
+}
+
+/* ============================================================
+   VISIT
+   ============================================================ */
+.visit{padding:140px 0;border-top:1px solid var(--line);}
+@media (max-width:720px){ .visit{padding:80px 0;} }
+
+.visit-head{margin-bottom:60px;max-width:760px;}
+.visit-head h2{
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(36px, 4.8vw, 68px);
+  line-height:1.02;
+  letter-spacing:-.03em;
+  margin-top:22px;
+}
+.visit-head h2 em{font-style:italic;font-weight:400;color:var(--accent);transition:color .7s var(--ease);}
+
+.visit-grid{
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:16px;
+}
+@media (max-width:960px){ .visit-grid{grid-template-columns:1fr;} }
+
+.map-frame{
+  position:relative;
+  min-height:560px;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  background:var(--bg-3);
+  border:1px solid var(--line);
+}
+.map-frame iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;
+  filter:invert(.92) hue-rotate(175deg) saturate(.55) brightness(.92) contrast(1.05);
+  opacity:.92;
+}
+.map-frame::after{
+  content:'';
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(12,10,8,.5) 100%);
+}
+.map-badge{
+  position:absolute;
+  top:20px;left:20px;
+  z-index:1;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:9px 14px;
+  border-radius:999px;
+  background:rgba(12,10,8,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line-2);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--text-2);
+}
+.map-badge .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px rgba(var(--accent-rgb),.9);
+  transition:background .7s var(--ease), box-shadow .7s var(--ease);
+}
+.map-coords{
+  position:absolute;
+  left:20px;right:20px;bottom:20px;
+  z-index:1;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:13px 16px;
+  border-radius:8px;
+  background:rgba(12,10,8,.8);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line-2);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+
+.info-stack{
+  display:flex;flex-direction:column;
+  gap:16px;
+}
+.info-block{
+  padding:32px;
+  border-radius:var(--radius-lg);
+  border:1px solid var(--line);
+  background:rgba(22,18,14,.35);
+  transition:border-color .4s var(--ease), background .4s;
+}
+.info-block:hover{
+  border-color:var(--line-2);
+  background:rgba(22,18,14,.5);
+}
+.info-label{
+  display:block;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  margin-bottom:16px;
+}
+.info-addr{
+  font-family:var(--serif);
+  font-size:22px;
+  font-weight:300;
+  line-height:1.35;
+  letter-spacing:-.015em;
+  color:var(--text);
+}
+.info-sub{
+  margin-top:10px;
+  font-size:14px;
+  color:var(--text-3);
+  line-height:1.6;
+  font-weight:300;
+}
+.info-actions{
+  margin-top:22px;
+  display:flex;flex-wrap:wrap;gap:8px;
+}
+.btn-sm{
+  padding:11px 18px;
+  font-size:10px;
+}
+.btn-quiet{
+  border:1px solid var(--line-2);
+  color:var(--text-2);
+  background:transparent;
+}
+.btn-quiet:hover{
+  border-color:var(--text);
+  color:var(--text);
+  background:rgba(240,234,224,.04);
+}
+
+.services{
+  display:flex;flex-direction:column;
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.service{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:14px;
+  padding:14px 18px;
+  background:var(--bg);
+}
+.service .name{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-2);
+}
+.service .val{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.service .val .dot{
+  width:6px;height:6px;border-radius:50%;
+}
+.service.on .val{color:var(--green);}
+.service.on .val .dot{background:var(--green);box-shadow:0 0 8px rgba(143,203,143,.7);}
+.service.off .val{color:var(--red);}
+.service.off .val .dot{background:var(--red);}
+
+.hours-row{
+  display:flex;justify-content:space-between;
+  gap:16px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.06em;
+}
+.hours-row:last-child{border-bottom:none;padding-bottom:0;}
+.hours-row .day{color:var(--text-3);text-transform:uppercase;font-size:10.5px;letter-spacing:.14em;}
+.hours-row .time{color:var(--text-2);}
+.hours-row.today .day,
+.hours-row.today .time{color:var(--accent);font-weight:500;}
+.hours-row.today .day::after{
+  content:' · today';
+  font-size:9px;
+  letter-spacing:.14em;
+  color:rgba(var(--accent-rgb),.65);
+  text-transform:uppercase;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  border-top:1px solid var(--line);
+  padding:80px 0 40px;
+  background:rgba(9,8,6,.5);
+}
+.foot-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:60px;
+  padding-bottom:60px;
+  border-bottom:1px solid var(--line);
+}
+@media (max-width:820px){ .foot-grid{grid-template-columns:1fr 1fr;gap:40px;} }
+@media (max-width:520px){ .foot-grid{grid-template-columns:1fr;gap:36px;} }
+
+.foot-brand{
+  display:flex;align-items:baseline;gap:12px;
+  margin-bottom:20px;
+}
+.foot-brand .logo-mark{font-size:28px;}
+.foot-brand .logo-sub{display:block;font-size:9px;}
+
+.foot-tag{
+  font-family:var(--serif);
+  font-size:18px;
+  font-weight:300;
+  line-height:1.5;
+  color:var(--text-2);
+  max-width:36ch;
+  letter-spacing:-.005em;
+}
+.foot-tag em{font-style:italic;color:var(--accent);transition:color .7s var(--ease);}
+
+.foot-col h4{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  margin-bottom:20px;
+  font-weight:400;
+}
+.foot-col a,
+.foot-col p{
+  display:block;
+  font-size:14px;
+  color:var(--text-2);
+  margin-bottom:12px;
+  font-weight:300;
+  transition:color .25s;
+}
+.foot-col a:hover{color:var(--accent);}
+
+.foot-bottom{
+  padding-top:32px;
+  display:flex;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+
+/* ============================================================
+   TRAY (floating)
+   ============================================================ */
+.tray{
+  position:fixed;
+  right:24px;bottom:24px;
+  z-index:880;
+  width:360px;
+  max-width:calc(100vw - 48px);
+  border-radius:var(--radius-lg);
+  border:1px solid var(--line-2);
+  background:rgba(14,12,10,.92);
+  backdrop-filter:blur(24px) saturate(150%);
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  box-shadow:0 40px 80px -40px rgba(0,0,0,1), 0 0 0 1px rgba(var(--accent-rgb),.06);
+  overflow:hidden;
+  transform:translateY(calc(100% - 60px));
+  transition:transform .6s var(--ease-out), border-color .4s var(--ease);
+}
+.tray.open{
+  transform:translateY(0);
+  border-color:rgba(var(--accent-rgb),.35);
+}
+@media (max-width:640px){
+  .tray{right:12px;left:12px;bottom:12px;width:auto;max-width:none;}
+}
+
+.tray-head{
+  width:100%;
+  height:60px;
+  display:flex;align-items:center;gap:14px;
+  padding:0 22px;
+  border-bottom:1px solid transparent;
+  transition:border-color .4s var(--ease);
+}
+.tray.open .tray-head{border-bottom-color:var(--line);}
+.tray-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+.tray-count{
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:500;
+  min-width:20px;height:20px;
+  padding:0 7px;
+  display:grid;place-items:center;
+  border-radius:999px;
+  background:rgba(var(--accent-rgb),.14);
+  color:var(--accent);
+  border:1px solid rgba(var(--accent-rgb),.32);
+  transition:all .4s var(--ease);
+}
+.tray-total-mini{
+  margin-left:auto;
+  font-family:var(--serif);
+  font-size:18px;
+  font-weight:400;
+  letter-spacing:-.015em;
+  color:var(--text);
+}
+.tray-chev{
+  width:13px;height:13px;
+  color:var(--text-3);
+  transition:transform .5s var(--ease-out);
+}
+.tray.open .tray-chev{transform:rotate(180deg);}
+
+.tray-body{
+  max-height:420px;
+  overflow-y:auto;
+  padding:8px 22px 24px;
+}
+.tray-list{
+  display:flex;flex-direction:column;
+}
+.tray-empty{
+  padding:32px 0 36px;
+  text-align:center;
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  line-height:2;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+.tray-row{
+  display:flex;align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  animation:fadeUp .35s var(--ease-out);
+}
+.tray-row:last-child{border-bottom:none;}
+.tray-row .r-info{flex:1;min-width:0;}
+.tray-row .r-name{
+  font-size:13.5px;
+  color:var(--text);
+  letter-spacing:-.005em;
+  line-height:1.3;
+}
+.tray-row .r-code{
+  display:block;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.14em;
+  color:var(--text-3);
+  margin-top:3px;
+  text-transform:uppercase;
+}
+.qty{
+  display:flex;align-items:center;gap:2px;
+  flex-shrink:0;
+}
+.qty button{
+  width:24px;height:24px;
+  border-radius:50%;
+  display:grid;place-items:center;
+  border:1px solid var(--line-2);
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--text-3);
+  transition:all .2s var(--ease);
+  line-height:1;
+}
+.qty button:hover{
+  color:var(--text);
+  border-color:var(--text);
+  background:rgba(240,234,224,.05);
+}
+.qty span{
+  font-family:var(--mono);
+  font-size:11.5px;
+  min-width:24px;
+  text-align:center;
+  color:var(--text-2);
+}
+.r-price{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:500;
+  color:var(--text);
+  min-width:52px;
+  text-align:right;
+  flex-shrink:0;
+}
+
+.tray-foot{padding-top:18px;}
+.tray-gauge{
+  height:2px;
+  background:rgba(240,234,224,.08);
+  border-radius:99px;
+  overflow:hidden;
+  position:relative;
+}
+.tray-gauge-fill{
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:width .6s var(--ease-out), background .7s var(--ease);
+}
+.tray-gauge-meta{
+  display:flex;justify-content:space-between;
+  margin-top:10px;
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+.tray-total{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.tray-total span{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--text-3);
+}
+.tray-total strong{
+  font-family:var(--serif);
+  font-size:30px;
+  font-weight:300;
+  letter-spacing:-.03em;
+  color:var(--text);
+  line-height:1;
+}
+.tray-note{
+  margin-top:12px;
+  font-family:var(--mono);
+  font-size:9.5px;
+  line-height:1.7;
+  letter-spacing:.04em;
+  color:var(--text-3);
+}
+.tray-actions{
+  display:flex;gap:8px;margin-top:18px;
+}
+.tray-actions .btn{flex:1;padding:13px 16px;font-size:10px;}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+.toast{
+  position:fixed;
+  left:50%;bottom:34px;
+  z-index:9999;
+  transform:translate(-50%, 130%);
+  display:flex;align-items:center;gap:12px;
+  padding:14px 22px;
+  border-radius:999px;
+  border:1px solid rgba(var(--accent-rgb),.4);
+  background:rgba(14,12,10,.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 24px 60px -22px rgba(0,0,0,1), 0 0 40px -18px rgba(var(--accent-rgb),.85);
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .55s var(--ease-out), opacity .4s;
+  white-space:nowrap;
+}
+.toast.show{transform:translate(-50%,0);opacity:1;}
+.toast .t-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 10px var(--accent);
+  transition:background .7s var(--ease), box-shadow .7s var(--ease);
+}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 1s var(--ease-out), transform 1s var(--ease-out);
+}
+.reveal.in{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  .ticker-track{animation:none;}
+  html{scroll-behavior:auto;}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important;}
+}
+</style>
 </head>
-<body class="bg-obsidian text-gray-100 font-sans selection:bg-orange-500 selection:text-white min-h-screen overflow-x-hidden transition-colors duration-500">
 
-    <!-- Toast Notification System -->
-    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+<body data-mode="espresso">
 
-    <!-- Background Canvas animation -->
-    <canvas id="ambient-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-40"></canvas>
+<div class="ambient ambient-a" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
 
-    <!-- Navigation Bar -->
-    <header class="fixed top-0 left-0 w-full z-40 glass-panel border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center gap-3 group" onclick="playAudio('click')">
-                <div class="w-10 h-10 rounded-lg bg-black/60 border border-white/15 flex items-center justify-center relative overflow-hidden group-hover:border-white/40 transition-colors">
-                    <span id="brand-logo-icon" class="text-xl dynamic-accent">☕</span>
-                    <div class="absolute inset-0 dynamic-bg-accent opacity-10 group-hover:opacity-20 transition-opacity"></div>
-                </div>
-                <div>
-                    <div class="font-display text-xl font-extrabold tracking-wider text-white uppercase flex items-center gap-1.5">
-                        MANFRED'S <span class="text-xs font-mono px-1.5 py-0.5 rounded bg-white/10 text-gray-300 font-normal tracking-normal border border-white/10">S11</span>
-                    </div>
-                    <div class="text-[10px] font-mono text-gray-400 tracking-widest uppercase flex items-center gap-2">
-                        <span>Coffee</span> <span class="dynamic-accent">•</span> <span>Lagerbier</span>
-                    </div>
-                </div>
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <a class="logo" href="#hero" aria-label="Manfred's home">
+    <span class="logo-mark">Manfred's</span>
+    <span class="logo-sub">Speciality Coffee &amp; Lagerbier</span>
+  </a>
+
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#story">Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#visit">Visit</a>
+  </nav>
+
+  <div class="nav-right">
+    <div class="status-pill" id="statusPill" role="status" aria-live="polite">
+      <span class="dot"></span>
+      <span class="label" id="statusLabel">CALIBRATING</span>
+    </div>
+    <a class="nav-cta" href="#visit">
+      Find us
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+    </a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="hero">
+  <div class="hero-media" aria-hidden="true">
+    <img class="active" data-mode-img="espresso"
+         src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=2400&q=80"
+         alt="" />
+    <img data-mode-img="lager"
+         src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2400&q=80"
+         alt="" />
+  </div>
+
+  <div class="hero-content">
+    <span class="eyebrow">Sheffield S11 · Opposite Endcliffe Park</span>
+
+    <h1 class="hero-title">
+      Where <em id="heroWord">espresso</em><br>
+      meets <em>evening</em>.
+    </h1>
+
+    <p class="hero-lede" id="heroLede">
+      A dual-purpose room on the edge of the park. Single-origin <strong>espresso by day</strong>,
+      cold-fermented <strong>lagerbier by night</strong> — poured with the same intent.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#menu">
+        Explore the menu
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-outline"
+         href="https://www.google.com/maps/search/?api=1&query=1+Rustlings+Rd+Sheffield+S11+7AA"
+         target="_blank" rel="noopener noreferrer">
+        Get directions
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+
+      <div class="mode-switch" role="tablist" aria-label="Beverage state">
+        <span class="indicator" aria-hidden="true"></span>
+        <button data-mode="espresso" role="tab" aria-selected="true">Espresso</button>
+        <button data-mode="lager" role="tab" aria-selected="false">Lagerbier</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <div class="hero-stat">
+      <span class="star">★</span> <b>4.9</b> · 18+ Google reviews
+    </div>
+    <div class="hero-stat">
+      <b>Open daily</b> · 8:00 — 20:00
+    </div>
+    <div class="hero-stat">
+      1 Rustlings Rd · <b>S11 7AA</b>
+    </div>
+    <div class="hero-stat">
+      <b>£1–10</b> per person
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TICKER ============================ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <span>Single-origin espresso</span>
+    <span>Cold-fermented lagerbier</span>
+    <span>Baked locally each morning</span>
+    <span>Opposite Endcliffe Park</span>
+    <span>Dine-in &amp; takeout</span>
+    <span>Sheffield S11 7AA</span>
+    <span>Open until 20:00</span>
+    <span>House roast · local roastery</span>
+  </div>
+</div>
+
+<!-- ============================ STORY ============================ -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="story-media reveal">
+        <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1400&q=80"
+             alt="Barista pulling a shot of espresso at Manfred's" loading="lazy" />
+        <div class="story-media-caption">
+          <span>The bar · Rustlings Road</span>
+          <span>06:30 — 20:00</span>
+        </div>
+      </div>
+
+      <div class="story-copy">
+        <span class="eyebrow reveal">Our Story</span>
+        <h2 class="reveal">A quiet corner that <em>changes shape</em> with the day.</h2>
+        <p class="reveal">
+          Manfred's opened on a small corner of Rustlings Road with a simple idea — build one
+          room that works as well at 8am as it does at 8pm. By day, that means a dialled-in
+          espresso bar with a short, deliberate menu. By evening, the lights drop, the taps open,
+          and the same room becomes a neighbourhood lagerbier bar.
+        </p>
+        <p class="reveal">
+          We roast with a small Sheffield roastery, pour lagerbier from a handful of independent
+          brewers, and bake with a bakery two streets away. Everything on the menu has a reason
+          to be there — nothing is filler.
+        </p>
+
+        <dl class="story-meta reveal">
+          <div>
+            <dt>Roast</dt>
+            <dd>Local <em>weekly</em></dd>
+          </div>
+          <div>
+            <dt>Taps</dt>
+            <dd>Four <em>rotating</em></dd>
+          </div>
+          <div>
+            <dt>Room</dt>
+            <dd>26 <em>seats</em></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ MENU ============================ -->
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="menu-head">
+      <div>
+        <span class="eyebrow reveal">// The Menu</span>
+        <h2 class="reveal">Short. <em>Considered.</em> <br>Always in season.</h2>
+      </div>
+      <p class="reveal">
+        Twelve lines across espresso, lagerbier, and the bakery. Tap any item to compile a
+        virtual tray — the tier runs £1–10 per person.
+      </p>
+    </div>
+
+    <div class="filters reveal" role="tablist" aria-label="Menu filters">
+      <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All <span class="count" data-count="all"></span></button>
+      <button class="filter-btn" data-filter="espresso" role="tab" aria-selected="false">Espresso <span class="count" data-count="espresso"></span></button>
+      <button class="filter-btn" data-filter="lager" role="tab" aria-selected="false">Lagerbier <span class="count" data-count="lager"></span></button>
+      <button class="filter-btn" data-filter="food" role="tab" aria-selected="false">Bakery <span class="count" data-count="food"></span></button>
+    </div>
+
+    <!-- Featured -->
+    <div class="featured reveal">
+      <div class="featured-media" id="featuredMedia">
+        <span class="featured-tag" id="featuredTag">Now pouring · ESP-01</span>
+        <img class="active" data-mode-img="espresso"
+             src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=1600&q=80"
+             alt="Flat white with latte art" loading="lazy" />
+        <img data-mode-img="lager"
+             src="https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=1600&q=80"
+             alt="Glass of lagerbier" loading="lazy" />
+      </div>
+
+      <div class="featured-info">
+        <span class="cat" id="featuredCat">Speciality Espresso</span>
+        <h3 id="featuredName">Flat <em>White</em></h3>
+        <p class="desc" id="featuredDesc">
+          Double ristretto, silky microfoam, served at six ounces. The reference point
+          for the whole bar — if this isn't right, nothing else matters.
+        </p>
+
+        <div class="flavor">
+          <b>Flavour profile</b>
+          <span id="featuredFlavor">Cocoa nib · Toasted hazelnut · Brown butter</span>
+        </div>
+
+        <div class="featured-price">
+          <span class="amt" id="featuredPrice">£3.40</span>
+          <span class="meta" id="featuredMeta">Huila, Colombia · Washed · 6oz</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- List -->
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<!-- ============================ GALLERY ============================ -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <div>
+        <span class="eyebrow reveal">// The Room</span>
+        <h2 class="reveal">Light, concrete, <em>warm wood</em>.</h2>
+      </div>
+      <p class="reveal">
+        A small, deliberate space — built for one person with a book, or six at the bar
+        on a Friday evening.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      <figure class="g-item g-1 reveal">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80" alt="Coffee served at the bar" loading="lazy" />
+        <figcaption class="g-cap">The bar · 08:14</figcaption>
+      </figure>
+      <figure class="g-item g-2 reveal">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80" alt="Fresh pastries on the counter" loading="lazy" />
+        <figcaption class="g-cap">Morning bake</figcaption>
+      </figure>
+      <figure class="g-item g-3 reveal">
+        <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?auto=format&fit=crop&w=1200&q=80" alt="Beer taps" loading="lazy" />
+        <figcaption class="g-cap">Four taps</figcaption>
+      </figure>
+      <figure class="g-item g-4 reveal">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=80" alt="Croissants" loading="lazy" />
+        <figcaption class="g-cap">Laminated daily</figcaption>
+      </figure>
+      <figure class="g-item g-5 reveal">
+        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80" alt="Coffee beans" loading="lazy" />
+        <figcaption class="g-cap">House roast</figcaption>
+      </figure>
+      <figure class="g-item g-6 reveal">
+        <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?auto=format&fit=crop&w=1200&q=80" alt="Lagerbier being poured" loading="lazy" />
+        <figcaption class="g-cap">Slow pour · 18:42</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ REVIEWS ============================ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="reviews-head">
+      <div class="rating-display reveal">
+        <span class="rating-num">4.9</span>
+        <div class="rating-meta">
+          <div class="rating-stars" id="starArray" aria-label="4.9 out of 5 stars"></div>
+          <p><b>Google rating</b><br>18+ verified reviews</p>
+        </div>
+      </div>
+
+      <div class="reviews-head-right reveal">
+        <h2>What the <em>neighbourhood</em> says.</h2>
+        <div class="search-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+          </svg>
+          <input id="reviewSearch" type="search" placeholder="Search reviews — try &quot;flat white&quot; or &quot;lager&quot;" autocomplete="off" aria-label="Search reviews" />
+        </div>
+      </div>
+    </div>
+
+    <div class="quotes reveal">
+      <blockquote class="quote">
+        <div class="quote-mark">“</div>
+        <p>Best flat white near Endcliffe Park.</p>
+        <cite>— Verbatim · Google review</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-mark">“</div>
+        <p>Cozy spot for a daytime coffee that shifts perfectly into an evening craft lager.</p>
+        <cite>— Verbatim · Google review</cite>
+      </blockquote>
+      <blockquote class="quote">
+        <div class="quote-mark">“</div>
+        <p>Impeccable local vibe right off Ecclesall Road.</p>
+        <cite>— Verbatim · Google review</cite>
+      </blockquote>
+    </div>
+
+    <div class="review-grid" id="reviewGrid"></div>
+  </div>
+</section>
+
+<!-- ============================ VISIT ============================ -->
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="visit-head">
+      <span class="eyebrow reveal">// Visit</span>
+      <h2 class="reveal">Come in. <em>We're easy to find.</em></h2>
+    </div>
+
+    <div class="visit-grid">
+      <div class="map-frame reveal">
+        <iframe
+          title="Map of Manfred's, 1 Rustlings Rd, Sheffield S11 7AA"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-1.5183%2C53.3614%2C-1.4923%2C53.3794&amp;layer=mapnik&amp;marker=53.3704%2C-1.5053">
+        </iframe>
+        <div class="map-badge"><span class="dot"></span> Live map · Sheffield S11</div>
+        <div class="map-coords">
+          <span>53.3704° N · 1.5053° W</span>
+          <span>Plus code 9F8V+J8</span>
+        </div>
+      </div>
+
+      <div class="info-stack">
+        <div class="info-block reveal">
+          <span class="info-label">Address</span>
+          <p class="info-addr">1 Rustlings Rd,<br>Sheffield S11 7AA,<br>United Kingdom</p>
+          <p class="info-sub">Directly opposite Endcliffe Park — a two-minute walk off Ecclesall Road.</p>
+          <div class="info-actions">
+            <button class="btn btn-quiet btn-sm" id="copyAddr" data-copy="1 Rustlings Rd, Sheffield S11 7AA, United Kingdom">
+              Copy address
+            </button>
+            <a class="btn btn-quiet btn-sm"
+               href="https://www.google.com/maps/dir/?api=1&destination=1+Rustlings+Rd+Sheffield+S11+7AA"
+               target="_blank" rel="noopener noreferrer">
+              Directions
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
             </a>
-
-            <!-- HUD Centerpiece: Real-time Operational Status -->
-            <div class="hidden lg:flex items-center px-4 py-1.5 rounded-full bg-black/40 border border-white/10 font-mono text-xs gap-3">
-                <div class="flex items-center gap-2">
-                    <span id="hud-status-dot" class="w-2.5 h-2.5 rounded-full bg-neon animate-pulse"></span>
-                    <span id="hud-status-text" class="text-neon font-semibold tracking-wide">[ 🟢 OPERATIONAL ]</span>
-                </div>
-                <span class="text-gray-600">|</span>
-                <div class="text-gray-300 flex items-center gap-1.5">
-                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span id="hud-time-display">SHEFFIELD 19:42:00</span>
-                </div>
-            </div>
-
-            <!-- Header Controls & Mode Switcher -->
-            <div class="flex items-center gap-3">
-                <!-- Dual Mode Toggle Button -->
-                <div class="bg-black/60 p-1 rounded-xl border border-white/10 flex items-center gap-1 font-mono text-xs">
-                    <button id="btn-state-espresso" onclick="switchThemeMode('espresso')" class="px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm">
-                        <span>☕</span> <span class="hidden sm:inline">ESPRESSO</span>
-                    </button>
-                    <button id="btn-state-lager" onclick="switchThemeMode('lager')" class="px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white">
-                        <span>🍺</span> <span class="hidden sm:inline">LAGERBIER</span>
-                    </button>
-                </div>
-
-                <!-- Order Tray Trigger Button -->
-                <button onclick="toggleOrderTray()" class="relative p-2.5 rounded-xl bg-black/60 border border-white/10 hover:border-white/30 text-gray-200 transition-colors flex items-center gap-2 font-mono text-xs">
-                    <svg class="w-5 h-5 dynamic-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                    <span class="hidden md:inline font-semibold">TRAY</span>
-                    <span id="tray-count-badge" class="w-5 h-5 rounded-full dynamic-bg-accent text-black font-bold text-[10px] flex items-center justify-center">0</span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden cyber-grid z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <!-- Main Copy Column -->
-                <div class="lg:col-span-7 space-y-6">
-                    <!-- HUD Operational Pill (Mobile & Tablet visible) -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-black/60 border border-white/10 font-mono text-xs text-gray-300">
-                        <span class="w-2 h-2 rounded-full bg-neon animate-pulse"></span>
-                        <span class="text-gray-400">STATUS:</span>
-                        <span id="hero-hud-detail" class="text-neon font-bold tracking-wider">ONLINE // SHEFFIELD S11</span>
-                    </div>
-
-                    <!-- Dynamic Headline -->
-                    <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight text-white leading-[1.05]">
-                        PRECISION <br>
-                        <span id="hero-headline-accent" class="dynamic-accent dynamic-text-glow transition-all duration-500">SPECIALITY BEVERAGES</span> <br>
-                        &amp; CRAFT CULTURE.
-                    </h1>
-
-                    <!-- Dynamic Subtitle -->
-                    <p id="hero-description" class="text-base sm:text-lg text-gray-300 max-w-2xl font-normal leading-relaxed">
-                        Situated at 1 Rustlings Rd directly opposite Endcliffe Park. We craft single-origin pour-overs and precision espresso by day, seamlessly shifting into rare German &amp; artisan craft lagers by night.
-                    </p>
-
-                    <!-- Key Spec Grid HUD -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 font-mono text-xs">
-                        <div class="p-3 rounded-lg glass-card border border-white/5">
-                            <span class="text-gray-500 block text-[10px] uppercase">Google Rating</span>
-                            <span class="text-lg font-bold text-yellow-400 flex items-center gap-1">4.9 ★ <span class="text-xs text-gray-400 font-normal">(18+)</span></span>
-                        </div>
-                        <div class="p-3 rounded-lg glass-card border border-white/5">
-                            <span class="text-gray-500 block text-[10px] uppercase">Price Tier</span>
-                            <span class="text-lg font-bold text-white">£1 – £10 <span class="text-xs text-gray-400 font-normal">/ pers</span></span>
-                        </div>
-                        <div class="p-3 rounded-lg glass-card border border-white/5 col-span-2 sm:col-span-1">
-                            <span class="text-gray-500 block text-[10px] uppercase">Location Zone</span>
-                            <span class="text-sm font-bold text-gray-200 truncate block">Endcliffe Park, UK</span>
-                        </div>
-                    </div>
-
-                    <!-- CTA Action Row -->
-                    <div class="flex flex-wrap gap-4 pt-4">
-                        <a href="#menu-matrix" onclick="playAudio('click')" class="px-7 py-4 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-sm tracking-wider uppercase flex items-center gap-3 hover:opacity-95 transition-all shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]">
-                            <span>[ ACCESS DIGITAL MENU ]</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </a>
-                        <a href="https://maps.google.com/?q=1+Rustlings+Rd,+Sheffield+S11+7AA" target="_blank" rel="noopener" onclick="playAudio('click')" class="px-7 py-4 rounded-xl glass-panel text-white font-mono font-medium text-sm tracking-wider uppercase flex items-center gap-3 hover:border-white/30 transition-all hover:bg-white/5">
-                            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span>LAUNCH MAP HUD</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Visual Focus Terminal / Dynamic Graphic -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative mx-auto max-w-md lg:max-w-none">
-                        <!-- Neon backdrop aura -->
-                        <div id="hero-glow-aura" class="absolute -inset-4 rounded-3xl dynamic-bg-accent opacity-20 blur-3xl transition-all duration-700"></div>
-                        
-                        <!-- Terminal Visual Container -->
-                        <div class="relative rounded-2xl glass-panel p-6 border border-white/15 shadow-2xl overflow-hidden scanline-container">
-                            <!-- Terminal Header Bar -->
-                            <div class="flex items-center justify-between pb-4 border-b border-white/10 font-mono text-xs text-gray-400 mb-6">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                                    <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                                    <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
-                                    <span class="ml-2 text-gray-500 text-[10px]">TERMINAL_V2.8</span>
-                                </div>
-                                <div id="terminal-mode-indicator" class="dynamic-accent font-bold">STATE: ESPRESSO</div>
-                            </div>
-
-                            <!-- Dynamic Visual Display Graphic -->
-                            <div class="relative h-64 rounded-xl bg-black/80 border border-white/10 flex flex-col items-center justify-center p-6 text-center overflow-hidden group">
-                                <div id="hero-interactive-badge" class="text-6xl mb-3 transform group-hover:scale-110 transition-transform duration-500">☕</div>
-                                <h3 id="hero-card-title" class="font-display text-2xl font-bold text-white uppercase tracking-wider">Ethiopia Guji Hambela</h3>
-                                <p id="hero-card-subtitle" class="font-mono text-xs dynamic-accent mt-1">Light Roast • Natural Process • Peach &amp; Jasmine Notes</p>
-
-                                <!-- Tech HUD Overlay lines inside preview -->
-                                <div class="absolute bottom-3 left-3 right-3 flex justify-between font-mono text-[10px] text-gray-500 border-t border-white/10 pt-2">
-                                    <span>TEMP: 93.4°C</span>
-                                    <span>PRESSURE: 9.0 BAR</span>
-                                    <span>EXTRACTION: 28s</span>
-                                </div>
-                            </div>
-
-                            <!-- Micro Specs Matrix -->
-                            <div class="grid grid-cols-2 gap-3 mt-4 font-mono text-xs">
-                                <div class="bg-black/40 p-2.5 rounded-lg border border-white/5">
-                                    <span class="text-gray-500 text-[10px] block">FLAVOUR INDEX</span>
-                                    <span id="spec-flavour" class="text-gray-200 font-medium">Stone Fruit, Floral</span>
-                                </div>
-                                <div class="bg-black/40 p-2.5 rounded-lg border border-white/5">
-                                    <span class="text-gray-500 text-[10px] block">CURRENT BATCH</span>
-                                    <span id="spec-origin" class="text-gray-200 font-medium">Roasted 3 Days Ago</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Dynamic Interactive Menu Section -->
-    <section id="menu-matrix" class="py-20 relative z-10 border-t border-white/10 bg-black/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Section Header -->
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-                <div>
-                    <div class="font-mono text-xs dynamic-accent uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <span>// DIGITALLY CATALOGUED</span>
-                        <span class="w-12 h-[1px] dynamic-bg-accent inline-block"></span>
-                    </div>
-                    <h2 class="font-display text-3xl sm:text-5xl font-extrabold uppercase text-white tracking-tight">
-                        THE BEVERAGE MATRIX
-                    </h2>
-                </div>
-
-                <!-- Matrix Category Filters -->
-                <div class="flex flex-wrap gap-2 font-mono text-xs bg-black/60 p-1.5 rounded-xl border border-white/10">
-                    <button onclick="filterMenu('all')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all bg-white/10 text-white" data-category="all">
-                        [ ALL ]
-                    </button>
-                    <button onclick="filterMenu('espresso')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="espresso">
-                        [ SPECIALITY ESPRESSO ]
-                    </button>
-                    <button onclick="filterMenu('lager')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="lager">
-                        [ CRAFT LAGERBIER ]
-                    </button>
-                    <button onclick="filterMenu('food')" class="menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white" data-category="food">
-                        [ BAKERY &amp; FOOD ]
-                    </button>
-                </div>
-            </div>
-
-            <!-- Items Matrix Grid -->
-            <div id="menu-items-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Javascript will dynamically inject items here -->
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Live Review Matrix & Social Proof Engine -->
-    <section class="py-20 relative z-10 border-t border-white/10 cyber-grid">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-                
-                <!-- Rating Score Summary Card -->
-                <div class="lg:col-span-4 glass-panel p-8 rounded-2xl border border-white/10 space-y-6">
-                    <div class="font-mono text-xs dynamic-accent uppercase tracking-wider">// VERIFIED SOCIAL PROOF</div>
-                    <div>
-                        <div class="text-6xl font-display font-extrabold text-white flex items-baseline gap-3">
-                            4.9 <span class="text-3xl font-mono text-yellow-400">★ ★ ★ ★ ★</span>
-                        </div>
-                        <p class="text-sm font-mono text-gray-400 mt-2">Based on 18+ verified Google reviews in Sheffield, UK.</p>
-                    </div>
-
-                    <hr class="border-white/10">
-
-                    <!-- Attribute Highlights -->
-                    <div class="space-y-3 font-mono text-xs">
-                        <div class="flex justify-between items-center text-gray-300">
-                            <span>Coffee Precision</span>
-                            <span class="text-neon font-bold">100% positive</span>
-                        </div>
-                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-neon h-full w-[100%]"></div>
-                        </div>
-
-                        <div class="flex justify-between items-center text-gray-300 pt-2">
-                            <span>Lagerbier Selection</span>
-                            <span class="text-neon font-bold">98% positive</span>
-                        </div>
-                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-neon h-full w-[98%]"></div>
-                        </div>
-
-                        <div class="flex justify-between items-center text-gray-300 pt-2">
-                            <span>Endcliffe Park Atmosphere</span>
-                            <span class="text-neon font-bold">100% positive</span>
-                        </div>
-                        <div class="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-neon h-full w-[100%]"></div>
-                        </div>
-                    </div>
-
-                    <button onclick="openReviewModal()" class="w-full py-3 rounded-xl border border-white/20 hover:border-white/40 font-mono text-xs uppercase tracking-wider text-white font-semibold transition-all bg-black/40 hover:bg-white/5">
-                        + SUBMIT VERIFIED TRANSMISSION
-                    </button>
-                </div>
-
-                <!-- Review Feed Filter & List -->
-                <div class="lg:col-span-8 space-y-6">
-                    <!-- Category Filter Buttons for Reviews -->
-                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
-                        <h3 class="font-display text-xl font-bold uppercase text-white">TESTIMONIAL TRANSMISSIONS</h3>
-                        <div class="flex gap-2 font-mono text-[11px]">
-                            <button onclick="filterReviews('all')" class="review-tag-btn px-3 py-1 rounded-md bg-white/10 text-white" data-tag="all">ALL</button>
-                            <button onclick="filterReviews('coffee')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="coffee">COFFEE</button>
-                            <button onclick="filterReviews('lager')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="lager">LAGER</button>
-                            <button onclick="filterReviews('vibes')" class="review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white" data-tag="vibes">VIBE</button>
-                        </div>
-                    </div>
-
-                    <!-- Reviews List Grid -->
-                    <div id="reviews-container" class="space-y-4">
-                        <!-- Javascript injects reviews here -->
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Geo-Terminal & Information Footer -->
-    <footer class="relative z-10 bg-black border-t border-white/10 pt-16 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-white/10">
-                
-                <!-- Geo-Terminal Styled Map Display -->
-                <div class="lg:col-span-6 space-y-4">
-                    <div class="font-mono text-xs dynamic-accent uppercase tracking-wider flex items-center justify-between">
-                        <span>// GEO-LOCATION TERMINAL</span>
-                        <span>PLUS CODE: 9F8V+J8</span>
-                    </div>
-
-                    <div class="relative h-64 rounded-2xl glass-panel border border-white/15 overflow-hidden flex items-center justify-center bg-obsidian group">
-                        <!-- Map Styling Background Placeholder/Mock Canvas -->
-                        <div class="absolute inset-0 bg-[radial-gradient(#1f2937_1px,transparent_1px)] [background-size:16px_16px] opacity-60"></div>
-                        
-                        <!-- Radar Concentric Rings & Target Pulse -->
-                        <div class="relative z-10 flex flex-col items-center text-center p-6">
-                            <div class="relative mb-4">
-                                <div class="w-12 h-12 rounded-full dynamic-bg-accent opacity-20 animate-ping absolute inset-0"></div>
-                                <div class="w-12 h-12 rounded-full border border-white/40 glass-panel flex items-center justify-center relative z-10 shadow-lg">
-                                    <span class="text-xl">📍</span>
-                                </div>
-                            </div>
-                            <h4 class="font-display text-lg font-bold text-white uppercase">MANFRED'S HQ</h4>
-                            <p class="font-mono text-xs text-gray-300 mt-1">1 Rustlings Rd, Sheffield S11 7AA, UK</p>
-                            <p class="font-mono text-[11px] text-gray-500 mt-0.5">Opposite Endcliffe Park • Off Ecclesall Rd</p>
-                            
-                            <button onclick="copyAddressToClipboard()" class="mt-4 px-4 py-2 rounded-lg bg-black/80 border border-white/20 hover:border-white/50 text-xs font-mono text-gray-200 transition-all flex items-center gap-2 hover:bg-white/10">
-                                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                                <span>COPY HUD ADDRESS</span>
-                            </button>
-                        </div>
-
-                        <!-- Map Grid Overlay Lines -->
-                        <div class="absolute top-2 left-2 font-mono text-[9px] text-gray-600">LAT: 53.3662 N</div>
-                        <div class="absolute bottom-2 right-2 font-mono text-[9px] text-gray-600">LNG: 1.5031 W</div>
-                    </div>
-                </div>
-
-                <!-- Service Status & Hours Grid -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="font-mono text-xs text-gray-400 uppercase tracking-wider">// SERVICE CAPABILITY MATRIX</div>
-
-                    <!-- Service Status Pills -->
-                    <div class="grid grid-cols-3 gap-3 font-mono text-xs">
-                        <div class="p-3 rounded-xl glass-panel border border-neon/30 text-center">
-                            <span class="block text-gray-400 text-[10px] uppercase">DINE-IN</span>
-                            <span class="text-neon font-bold">ONLINE</span>
-                        </div>
-                        <div class="p-3 rounded-xl glass-panel border border-neon/30 text-center">
-                            <span class="block text-gray-400 text-[10px] uppercase">TAKEOUT</span>
-                            <span class="text-neon font-bold">AVAILABLE</span>
-                        </div>
-                        <div class="p-3 rounded-xl glass-panel border border-red-500/30 text-center">
-                            <span class="block text-gray-400 text-[10px] uppercase">DELIVERY</span>
-                            <span class="text-red-400 font-bold">DISABLED</span>
-                        </div>
-                    </div>
-
-                    <!-- Hours Breakdown Table -->
-                    <div class="glass-panel p-5 rounded-xl border border-white/10 space-y-3 font-mono text-xs">
-                        <div class="flex justify-between items-center text-gray-300 pb-2 border-b border-white/5">
-                            <span class="font-semibold text-white">OPERATIONAL HOURS</span>
-                            <span class="text-neon">OPEN DAILY</span>
-                        </div>
-                        <div class="flex justify-between items-center text-gray-400">
-                            <span>Monday – Sunday</span>
-                            <span class="text-gray-200">08:00 AM – 08:00 PM</span>
-                        </div>
-                        <div class="flex justify-between items-center text-gray-400">
-                            <span>Day/Night Mode Shift</span>
-                            <span class="dynamic-accent">~ 04:00 PM DAILY</span>
-                        </div>
-                    </div>
-
-                    <p class="text-xs text-gray-500 font-mono">
-                        *Note: Manfred's prioritises in-person atmosphere and tactile drink craftsmanship. Delivery services are intentionally disabled to preserve serving temperatures and foam integrity.
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- Bottom Copyright Bar -->
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-gray-500 gap-4">
-                <div>
-                    © 2026 MANFRED'S CRAFT &amp; COFFEE LTD. ALL RIGHTS RESERVED.
-                </div>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-gray-300 transition-colors">INSTAGRAM</a>
-                    <a href="#" class="hover:text-gray-300 transition-colors">UNTAPPD</a>
-                    <a href="#" class="hover:text-gray-300 transition-colors">PRIVACY HUD</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Order Tray Sidebar Drawer -->
-    <div id="order-tray-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-obsidian/95 backdrop-blur-2xl border-l border-white/15 z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
-        <!-- Drawer Header -->
-        <div class="p-6 border-b border-white/10 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg dynamic-bg-accent/20 border border-white/20 flex items-center justify-center text-lg">🛒</div>
-                <h3 class="font-display text-lg font-bold text-white uppercase tracking-wider">YOUR VIRTUAL TRAY</h3>
-            </div>
-            <button onclick="toggleOrderTray()" class="p-2 text-gray-400 hover:text-white font-mono text-xl">✕</button>
+          </div>
         </div>
 
-        <!-- Price Tier Indicator Bar (£1-£10 Threshold) -->
-        <div class="p-4 bg-black/60 border-b border-white/10 font-mono text-xs">
-            <div class="flex justify-between text-gray-400 mb-1.5">
-                <span>LOCAL PRICE TIER METRIC</span>
-                <span id="tray-tier-text" class="text-white font-bold">£0.00 / £10 Threshold</span>
+        <div class="info-block reveal">
+          <span class="info-label">Service</span>
+          <div class="services">
+            <div class="service on">
+              <span class="name">Dine-in</span>
+              <span class="val"><span class="dot"></span>Available</span>
             </div>
-            <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
-                <div id="tray-budget-bar" class="dynamic-bg-accent h-full w-0 transition-all duration-300"></div>
+            <div class="service on">
+              <span class="name">Takeout</span>
+              <span class="val"><span class="dot"></span>Available</span>
             </div>
+            <div class="service off">
+              <span class="name">Delivery</span>
+              <span class="val"><span class="dot"></span>Not offered</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Order Items List -->
-        <div id="tray-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
-            <!-- Items populated dynamically -->
+        <div class="info-block reveal">
+          <span class="info-label">Hours</span>
+          <div id="hoursList"></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Drawer Footer & Summary -->
-        <div class="p-6 border-t border-white/10 bg-black/80 space-y-4">
-            <div class="space-y-1.5 font-mono text-xs">
-                <div class="flex justify-between text-gray-400">
-                    <span>SUBTOTAL</span>
-                    <span id="tray-subtotal" class="text-gray-200">£0.00</span>
-                </div>
-                <div class="flex justify-between text-gray-400">
-                    <span>ESTIMATED VAT (20%)</span>
-                    <span id="tray-vat" class="text-gray-200">£0.00</span>
-                </div>
-                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-white/10">
-                    <span>TOTAL ESTIMATE</span>
-                    <span id="tray-total" class="dynamic-accent">£0.00</span>
-                </div>
-            </div>
+</main>
 
-            <button onclick="checkoutReceipt()" class="w-full py-4 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-sm uppercase tracking-wider hover:opacity-95 transition-all shadow-lg">
-                GENERATE DIGITAL RECEIPT
-            </button>
-            <button onclick="clearTray()" class="w-full py-2 text-xs font-mono text-gray-500 hover:text-red-400 transition-colors">
-                CLEAR ALL ITEMS
-            </button>
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <span class="logo-mark">Manfred's</span>
+          <span class="logo-sub">Speciality Coffee &amp; Lagerbier</span>
         </div>
+        <p class="foot-tag">
+          One small room in Sheffield S11. <em>Espresso by day, lagerbier by night.</em>
+        </p>
+      </div>
+
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#story">Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+      </div>
+
+      <div class="foot-col">
+        <h4>Find us</h4>
+        <a href="https://www.google.com/maps/search/?api=1&query=1+Rustlings+Rd+Sheffield+S11+7AA" target="_blank" rel="noopener noreferrer">Google Maps ↗</a>
+        <p>1 Rustlings Rd, S11 7AA</p>
+        <p>Open daily · 8:00 — 20:00</p>
+        <p>£1–10 per person</p>
+      </div>
     </div>
 
-    <!-- Review Submission Modal Overlay -->
-    <div id="review-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-panel max-w-lg w-full rounded-2xl p-6 border border-white/15 space-y-4 relative">
-            <button onclick="closeReviewModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white font-mono text-lg">✕</button>
-            
-            <div class="font-mono text-xs dynamic-accent uppercase">// TRANSMIT FEEDBACK</div>
-            <h3 class="font-display text-2xl font-bold text-white uppercase">SUBMIT GOOGLE REVIEW</h3>
-
-            <div class="space-y-3 font-mono text-xs">
-                <div>
-                    <label class="block text-gray-400 mb-1">YOUR CALLSIGN / NAME</label>
-                    <input id="rev-input-name" type="text" placeholder="e.g. Alex M." class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1">BEVERAGE CATEGORY</label>
-                    <select id="rev-input-category" class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40">
-                        <option value="coffee">Speciality Coffee</option>
-                        <option value="lager">Craft Lagerbier</option>
-                        <option value="vibes">Atmosphere &amp; Location</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1">TRANSMISSION TEXT</label>
-                    <textarea id="rev-input-text" rows="3" placeholder="Share your experience at 1 Rustlings Rd..." class="w-full bg-black/60 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-white/40"></textarea>
-                </div>
-            </div>
-
-            <button onclick="submitReview()" class="w-full py-3 rounded-xl dynamic-bg-accent text-black font-mono font-bold text-xs uppercase tracking-wider hover:opacity-90">
-                TRANSMIT TRANSMISSION
-            </button>
-        </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Manfred's — Speciality Coffee &amp; Lagerbier</span>
+      <span>Plus code 9F8V+J8 · Sheffield, UK</span>
     </div>
-
-    <!-- Application JavaScript Engine -->
-    <script>
-        /* ==========================================================================
-           1. CORE DATA MATRIX (Menu Items & Reviews)
-           ========================================================================== */
-        const MENU_DATA = [
-            {
-                id: 'm1',
-                title: 'Ethiopia Guji Pour-Over',
-                category: 'espresso',
-                price: 4.20,
-                type: 'Coffee',
-                tags: ['Vegan', 'Single Origin', 'Light Roast'],
-                icon: '☕',
-                description: 'V60 manual brew featuring notes of white peach, jasmine floral aroma, and sparkling citric acidity.',
-                specs: { Sensory: 'Floral / Peach', Acidly: 85, Body: 45, Bitterness: 20 }
-            },
-            {
-                id: 'm2',
-                title: 'Flat White (Oat / Dairy)',
-                category: 'espresso',
-                price: 3.80,
-                type: 'Coffee',
-                tags: ['Local Roast', 'Organic Milk'],
-                icon: '🥛',
-                description: 'Double shot of house espresso micro-foamed with local Sheffield dairy or Minor Figures Oat milk.',
-                specs: { Sensory: 'Chocolate / Hazelnut', Acidly: 40, Body: 80, Bitterness: 35 }
-            },
-            {
-                id: 'm3',
-                title: 'Rothaus Tannenzäpfle Pilsner',
-                category: 'lager',
-                price: 5.50,
-                priceUnit: 'Pint',
-                type: 'Lagerbier',
-                abv: '5.1%',
-                tags: ['German Craft', 'Imported'],
-                icon: '🍺',
-                description: 'Legendary Black Forest pilsner. Crisp, clean, herbal hop aroma with balanced noble bitterness.',
-                specs: { Sensory: 'Crisp / Herbal Hop', Acidly: 20, Body: 60, Bitterness: 65 }
-            },
-            {
-                id: 'm4',
-                title: 'Augustiner Helles Lager',
-                category: 'lager',
-                price: 5.80,
-                priceUnit: 'Pint',
-                type: 'Lagerbier',
-                abv: '5.2%',
-                tags: ['Munich Classic', 'Draft'],
-                icon: '🍻',
-                description: 'Munich’s oldest brewery. Unbelievably smooth malt backbone with velvet carbonation.',
-                specs: { Sensory: 'Sweet Malt / Velvet', Acidly: 10, Body: 75, Bitterness: 30 }
-            },
-            {
-                id: 'm5',
-                title: 'Artisan Cardamom Buns',
-                category: 'food',
-                price: 3.60,
-                type: 'Bakery',
-                tags: ['Vegetarian', 'Baked Daily'],
-                icon: '🥐',
-                description: 'Freshly baked local sourdough bun infused with freshly crushed green cardamom and pearl sugar.',
-                specs: { Sensory: 'Spiced / Butter', Acidly: 0, Body: 90, Bitterness: 10 }
-            },
-            {
-                id: 'm6',
-                title: 'Endcliffe Vegan Toastie',
-                category: 'food',
-                price: 6.90,
-                type: 'Food',
-                tags: ['Vegan', 'Local Bread'],
-                icon: '🥪',
-                description: 'Artisan sourdough, cashew pesto, slow-roasted vine tomatoes, and aged vegan cheddar melt.',
-                specs: { Sensory: 'Savoury / Tangy', Acidly: 30, Body: 85, Bitterness: 15 }
-            }
-        ];
-
-        const INITIAL_REVIEWS = [
-            {
-                id: 'r1',
-                name: 'Dominic V.',
-                rating: 5,
-                category: 'coffee',
-                time: '2 days ago',
-                text: 'Best flat white near Endcliffe Park. The barista’s attention to water temperature and roast origin is unmatched in Sheffield.'
-            },
-            {
-                id: 'r2',
-                name: 'Sarah & Mark',
-                rating: 5,
-                category: 'lager',
-                time: '1 week ago',
-                text: 'Cozy spot for a daytime coffee that shifts perfectly into an evening craft lager. The Rothaus on tap is served at exact German cellar temp!'
-            },
-            {
-                id: 'r3',
-                name: 'Liam K.',
-                rating: 5,
-                category: 'vibes',
-                time: '3 weeks ago',
-                text: 'Impeccable local vibe right off Ecclesall Road. Brilliant glass front views of the park during autumn afternoon catchups.'
-            }
-        ];
-
-        /* ==========================================================================
-           2. STATE MANAGEMENT & GLOBALS
-           ========================================================================== */
-        let currentTheme = 'espresso'; // 'espresso' or 'lager'
-        let currentMenuCategory = 'all';
-        let currentReviewCategory = 'all';
-        let orderTray = [];
-        let reviewsList = [...INITIAL_REVIEWS];
-
-        /* ==========================================================================
-           3. WEB AUDIO API SYNTHESIZER (Tactile SFX)
-           ========================================================================== */
-        let audioCtx = null;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function playAudio(type) {
-            try {
-                initAudio();
-                if (audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
-                const now = audioCtx.currentTime;
-
-                if (type === 'click') {
-                    // Crisp Sci-Fi UI Click
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(800, now);
-                    osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
-                    osc.start(now);
-                    osc.stop(now + 0.05);
-                } else if (type === 'toggle') {
-                    // Cyber Mode Shift Sound
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(currentTheme === 'espresso' ? 300 : 600, now);
-                    osc.frequency.exponentialRampToValueAtTime(currentTheme === 'espresso' ? 600 : 300, now + 0.15);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
-                    osc.start(now);
-                    osc.stop(now + 0.15);
-                } else if (type === 'add') {
-                    // Positive Item Add Chime
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, now); // C5
-                    osc.frequency.setValueAtTime(659.25, now + 0.06); // E5
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.linearRampToValueAtTime(0.01, now + 0.15);
-                    osc.start(now);
-                    osc.stop(now + 0.15);
-                }
-            } catch (e) {
-                // Audio Context fallback silent
-            }
-        }
-
-        /* ==========================================================================
-           4. AMBIENT HTML5 CANVAS PARTICLE SYSTEM
-           ========================================================================== */
-        const canvas = document.getElementById('ambient-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 50;
-                this.radius = Math.random() * 2.5 + 0.5;
-                
-                if (currentTheme === 'espresso') {
-                    // Steam floating upwards slowly
-                    this.speedY = -(Math.random() * 0.8 + 0.2);
-                    this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
-                    this.opacity = Math.random() * 0.4 + 0.1;
-                } else {
-                    // Carbonated Lager bubbles rising quickly
-                    this.speedY = -(Math.random() * 2.0 + 0.8);
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.opacity = Math.random() * 0.7 + 0.2;
-                }
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-
-                if (this.y < -10) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                
-                if (currentTheme === 'espresso') {
-                    ctx.fillStyle = `rgba(230, 126, 34, ${this.opacity})`;
-                } else {
-                    ctx.fillStyle = `rgba(241, 196, 15, ${this.opacity})`;
-                }
-                
-                ctx.fill();
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 60; i++) {
-                particles.push(new Particle());
-            }
-        }
-        initParticles();
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
-
-        /* ==========================================================================
-           5. CYBER THEME DUAL MODE SWITCHER
-           ========================================================================== */
-        function switchThemeMode(mode) {
-            if (currentTheme === mode) return;
-            currentTheme = mode;
-            playAudio('toggle');
-
-            const body = document.body;
-            const btnEspresso = document.getElementById('btn-state-espresso');
-            const btnLager = document.getElementById('btn-state-lager');
-            const heroAccent = document.getElementById('hero-headline-accent');
-            const terminalIndicator = document.getElementById('terminal-mode-indicator');
-            const heroCardTitle = document.getElementById('hero-card-title');
-            const heroCardSub = document.getElementById('hero-card-subtitle');
-            const heroBadge = document.getElementById('hero-interactive-badge');
-            const brandLogoIcon = document.getElementById('brand-logo-icon');
-            const flavourSpec = document.getElementById('spec-flavour');
-
-            if (mode === 'lager') {
-                body.classList.add('lager-state');
-                
-                btnLager.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm";
-                btnEspresso.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white";
-
-                heroAccent.innerText = "CRAFT LAGERBIER";
-                terminalIndicator.innerText = "STATE: LAGERBIER";
-                terminalIndicator.className = "text-lager font-bold";
-                
-                heroCardTitle.innerText = "Rothaus Tannenzäpfle";
-                heroCardSub.innerText = "Imported Black Forest Pilsner • 5.1% ABV • Cellar Temp";
-                heroBadge.innerText = "🍺";
-                brandLogoIcon.innerText = "🍺";
-                flavourSpec.innerText = "Herbal Hop, Crisp Malt";
-
-                // Auto filter menu matrix to lager if currently showing all or espresso
-                filterMenu('lager');
-
-                showToast("SHIFTED TO LAGERBIER STATE [ NIGHT MODE ]");
-            } else {
-                body.classList.remove('lager-state');
-                
-                btnEspresso.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 bg-white/10 text-white font-medium shadow-sm";
-                btnLager.className = "px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all duration-300 text-gray-400 hover:text-white";
-
-                heroAccent.innerText = "SPECIALITY BEVERAGES";
-                terminalIndicator.innerText = "STATE: ESPRESSO";
-                terminalIndicator.className = "dynamic-accent font-bold";
-
-                heroCardTitle.innerText = "Ethiopia Guji Hambela";
-                heroCardSub.innerText = "Light Roast • Natural Process • Peach & Jasmine Notes";
-                heroBadge.innerText = "☕";
-                brandLogoIcon.innerText = "☕";
-                flavourSpec.innerText = "Stone Fruit, Floral";
-
-                filterMenu('espresso');
-
-                showToast("SHIFTED TO ESPRESSO STATE [ DAY MODE ]");
-            }
-
-            // Re-initialize particles to alter physics speed
-            initParticles();
-        }
-
-        /* ==========================================================================
-           6. REAL-TIME LIVE HUD CLOCK & OPERATIONAL CALCULATOR
-           ========================================================================== */
-        function updateHUDClock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-
-            const timeString = `SHEFFIELD ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            document.getElementById('hud-time-display').innerText = timeString;
-
-            // Operational check (08:00 to 20:00 Daily)
-            const openHour = 8;
-            const closeHour = 20;
-
-            const isOpen = hours >= openHour && hours < closeHour;
-            const statusDot = document.getElementById('hud-status-dot');
-            const statusText = document.getElementById('hud-status-text');
-
-            if (isOpen) {
-                const remainingHours = closeHour - 1 - hours;
-                const remainingMins = 59 - minutes;
-                statusText.innerText = `[ 🟢 OPERATIONAL - CLOSES IN ${remainingHours}h ${remainingMins}m ]`;
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-neon animate-pulse";
-            } else {
-                statusText.innerText = `[ 🔴 OFF-LINE - OPENS AT 08:00 AM ]`;
-                statusDot.className = "w-2.5 h-2.5 rounded-full bg-red-500";
-            }
-        }
-        setInterval(updateHUDClock, 1000);
-        updateHUDClock();
-
-        /* ==========================================================================
-           7. DYNAMIC MENU RENDERER & FILTER ENGINE
-           ========================================================================== */
-        function renderMenu() {
-            const grid = document.getElementById('menu-items-grid');
-            grid.innerHTML = '';
-
-            const filtered = currentMenuCategory === 'all' 
-                ? MENU_DATA 
-                : MENU_DATA.filter(item => item.category === currentMenuCategory);
-
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "glass-card rounded-2xl p-6 relative flex flex-col justify-between group";
-                
-                const tagsHTML = item.tags.map(t => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300">${t}</span>`).join(' ');
-
-                card.innerHTML = `
-                    <div>
-                        <!-- Card Header Top Bar -->
-                        <div class="flex items-start justify-between gap-4 mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 rounded-xl bg-black/60 border border-white/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                                    ${item.icon}
-                                </div>
-                                <div>
-                                    <span class="font-mono text-[10px] text-gray-400 uppercase tracking-wider">${item.type} ${item.abv ? `• ${item.abv}` : ''}</span>
-                                    <h3 class="font-display text-lg font-bold text-white group-hover:text-amber-400 transition-colors">${item.title}</h3>
-                                </div>
-                            </div>
-                            <div class="font-mono text-lg font-extrabold dynamic-accent">
-                                £${item.price.toFixed(2)}
-                            </div>
-                        </div>
-
-                        <p class="text-xs text-gray-300 font-sans mb-4 leading-relaxed">${item.description}</p>
-
-                        <!-- Tags Row -->
-                        <div class="flex flex-wrap gap-1.5 mb-4">
-                            ${tagsHTML}
-                        </div>
-
-                        <!-- Sensory Sliders HUD -->
-                        <div class="space-y-1.5 font-mono text-[10px] bg-black/40 p-3 rounded-lg border border-white/5 mb-6">
-                            <div class="flex justify-between text-gray-400">
-                                <span>FLAVOUR PROFILE: ${item.specs.Sensory}</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-12 text-gray-500">BODY</span>
-                                <div class="flex-1 bg-white/10 h-1 rounded-full overflow-hidden">
-                                    <div class="dynamic-bg-accent h-full" style="width: ${item.specs.Body}%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Add to Tray Button -->
-                    <button onclick="addToTray('${item.id}')" class="w-full py-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/30 dynamic-accent font-mono font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 group-hover:bg-white/10">
-                        <span>+ ADD TO VIRTUAL TRAY</span>
-                    </button>
-                `;
-
-                grid.appendChild(card);
-            });
-        }
-
-        function filterMenu(category) {
-            currentMenuCategory = category;
-            playAudio('click');
-
-            document.querySelectorAll('.menu-filter-btn').forEach(btn => {
-                if (btn.dataset.category === category) {
-                    btn.className = "menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all bg-white/10 text-white shadow-sm border border-white/20";
-                } else {
-                    btn.className = "menu-filter-btn px-4 py-2 rounded-lg font-semibold transition-all text-gray-400 hover:text-white";
-                }
-            });
-
-            renderMenu();
-        }
-
-        /* ==========================================================================
-           8. VIRTUAL ORDER TRAY & BUDGET ESTIMATOR (£1-10 Threshold)
-           ========================================================================== */
-        function toggleOrderTray() {
-            playAudio('click');
-            const drawer = document.getElementById('order-tray-drawer');
-            drawer.classList.toggle('translate-x-full');
-        }
-
-        function addToTray(itemId) {
-            const item = MENU_DATA.find(i => i.id === itemId);
-            if (!item) return;
-
-            playAudio('add');
-            
-            const existing = orderTray.find(i => i.id === itemId);
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                orderTray.push({ ...item, quantity: 1 });
-            }
-
-            updateTrayUI();
-            showToast(`ADDED: ${item.title}`);
-        }
-
-        function removeFromTray(itemId) {
-            playAudio('click');
-            const index = orderTray.findIndex(i => i.id === itemId);
-            if (index > -1) {
-                if (orderTray[index].quantity > 1) {
-                    orderTray[index].quantity -= 1;
-                } else {
-                    orderTray.splice(index, 1);
-                }
-            }
-            updateTrayUI();
-        }
-
-        function clearTray() {
-            playAudio('click');
-            orderTray = [];
-            updateTrayUI();
-            showToast("VIRTUAL TRAY CLEARED");
-        }
-
-        function updateTrayUI() {
-            const container = document.getElementById('tray-items-container');
-            const badge = document.getElementById('tray-count-badge');
-            const subtotalEl = document.getElementById('tray-subtotal');
-            const vatEl = document.getElementById('tray-vat');
-            const totalEl = document.getElementById('tray-total');
-            const budgetBar = document.getElementById('tray-budget-bar');
-            const tierText = document.getElementById('tray-tier-text');
-
-            const totalCount = orderTray.reduce((sum, item) => sum + item.quantity, 0);
-            badge.innerText = totalCount;
-
-            const subtotal = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const vat = subtotal * 0.20;
-            const total = subtotal;
-
-            subtotalEl.innerText = `£${(subtotal - vat).toFixed(2)}`;
-            vatEl.innerText = `£${vat.toFixed(2)}`;
-            totalEl.innerText = `£${total.toFixed(2)}`;
-
-            // Budget tier meter (£1 - £10 typical spending threshold)
-            const maxThreshold = 10.00;
-            const percentage = Math.min((total / maxThreshold) * 100, 100);
-            budgetBar.style.width = `${percentage}%`;
-
-            if (total <= maxThreshold) {
-                tierText.innerText = `£${total.toFixed(2)} / £10.00 (Standard Tier)`;
-                tierText.className = "text-neon font-bold";
-            } else {
-                tierText.innerText = `£${total.toFixed(2)} (Premium Group Order)`;
-                tierText.className = "text-yellow-400 font-bold";
-            }
-
-            if (orderTray.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-16 text-gray-500 font-mono text-xs">
-                        <div class="text-4xl mb-3">🛒</div>
-                        <p>YOUR VIRTUAL TRAY IS EMPTY</p>
-                        <p class="text-[10px] text-gray-600 mt-1">Select items from the matrix to build your digital order estimate.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            container.innerHTML = orderTray.map(item => `
-                <div class="flex items-center justify-between p-3 rounded-xl glass-card border border-white/5 font-mono text-xs">
-                    <div class="flex items-center gap-3">
-                        <span class="text-lg">${item.icon}</span>
-                        <div>
-                            <div class="font-bold text-white">${item.title}</div>
-                            <div class="text-[10px] text-gray-400">£${item.price.toFixed(2)} each</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="removeFromTray('${item.id}')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold">-</button>
-                        <span class="w-4 text-center text-white font-bold">${item.quantity}</span>
-                        <button onclick="addToTray('${item.id}')" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold">+</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function checkoutReceipt() {
-            if (orderTray.length === 0) {
-                showToast("TRAY IS EMPTY - ADD ITEMS FIRST");
-                return;
-            }
-            playAudio('click');
-            const total = orderTray.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            showToast(`RECEIPT GENERATED: £${total.toFixed(2)} // SHOW AT BAR`);
-        }
-
-        /* ==========================================================================
-           9. REVIEWS ENGINE & FEEDBACK MODAL
-           ========================================================================== */
-        function renderReviews() {
-            const container = document.getElementById('reviews-container');
-            container.innerHTML = '';
-
-            const filtered = currentReviewCategory === 'all'
-                ? reviewsList
-                : reviewsList.filter(r => r.category === currentReviewCategory);
-
-            filtered.forEach(rev => {
-                const card = document.createElement('div');
-                card.className = "glass-card p-5 rounded-xl border border-white/5 space-y-2 font-mono text-xs";
-                card.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <span class="font-bold text-white text-sm">${rev.name}</span>
-                        <span class="text-yellow-400">★ ★ ★ ★ ★</span>
-                    </div>
-                    <p class="text-gray-300 font-sans text-xs leading-relaxed">"${rev.text}"</p>
-                    <div class="flex justify-between text-[10px] text-gray-500 pt-1">
-                        <span>TAG: ${rev.category.toUpperCase()}</span>
-                        <span>${rev.time}</span>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterReviews(tag) {
-            currentReviewCategory = tag;
-            playAudio('click');
-
-            document.querySelectorAll('.review-tag-btn').forEach(btn => {
-                if (btn.dataset.tag === tag) {
-                    btn.className = "review-tag-btn px-3 py-1 rounded-md bg-white/10 text-white font-bold";
-                } else {
-                    btn.className = "review-tag-btn px-3 py-1 rounded-md text-gray-400 hover:text-white";
-                }
-            });
-
-            renderReviews();
-        }
-
-        function openReviewModal() {
-            playAudio('click');
-            document.getElementById('review-modal').classList.remove('hidden');
-        }
-
-        function closeReviewModal() {
-            playAudio('click');
-            document.getElementById('review-modal').classList.add('hidden');
-        }
-
-        function submitReview() {
-            const name = document.getElementById('rev-input-name').value.trim();
-            const category = document.getElementById('rev-input-category').value;
-            const text = document.getElementById('rev-input-text').value.trim();
-
-            if (!name || !text) {
-                showToast("PLEASE FILL ALL TRANSMISSION FIELDS");
-                return;
-            }
-
-            reviewsList.unshift({
-                id: 'r_' + Date.now(),
-                name: name,
-                rating: 5,
-                category: category,
-                time: 'Just now',
-                text: text
-            });
-
-            closeReviewModal();
-            renderReviews();
-            showToast("TRANSMISSION RECEIVED // THANK YOU!");
-
-            // Clear inputs
-            document.getElementById('rev-input-name').value = '';
-            document.getElementById('rev-input-text').value = '';
-        }
-
-        /* ==========================================================================
-           10. UTILITY SYSTEM (Toast notifications & Address copy)
-           ========================================================================== */
-        function copyAddressToClipboard() {
-            playAudio('click');
-            const addressText = "1 Rustlings Rd, Sheffield S11 7AA, United Kingdom";
-            
-            const tempInput = document.createElement("input");
-            tempInput.value = addressText;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-
-            showToast("COPIED TO HUD CLIPBOARD!");
-        }
-
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = "glass-panel px-4 py-3 rounded-xl border border-white/20 dynamic-accent font-mono text-xs font-bold shadow-2xl flex items-center gap-2 transform translate-x-10 opacity-0 transition-all duration-300";
-            toast.innerHTML = `<span>⚡</span> <span>${message}</span>`;
-
-            container.appendChild(toast);
-
-            // Animate in
-            setTimeout(() => {
-                toast.classList.remove('translate-x-10', 'opacity-0');
-            }, 10);
-
-            // Animate out & remove
-            setTimeout(() => {
-                toast.classList.add('translate-x-10', 'opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        /* Initial Execution on Load */
-        window.onload = function() {
-            renderMenu();
-            renderReviews();
-            updateTrayUI();
-        };
-    </script>
+  </div>
+</footer>
+
+<!-- ============================ TRAY ============================ -->
+<aside class="tray" id="tray" aria-label="Virtual order tray">
+  <button class="tray-head" id="trayHead" aria-expanded="false" aria-controls="trayBody">
+    <span class="tray-title">Order tray</span>
+    <span class="tray-count" id="trayCount">0</span>
+    <span class="tray-total-mini" id="trayMini">£0.00</span>
+    <svg class="tray-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="m6 15 6-6 6 6"/>
+    </svg>
+  </button>
+
+  <div class="tray-body" id="trayBody">
+    <ul class="tray-list" id="trayList">
+      <li class="tray-empty">Tray empty<br>Select items from the menu</li>
+    </ul>
+
+    <div class="tray-foot">
+      <div class="tray-gauge"><div class="tray-gauge-fill" id="trayGauge"></div></div>
+      <div class="tray-gauge-meta">
+        <span id="trayGaugeLabel">£0.00 / £10.00</span>
+        <span>Per person</span>
+      </div>
+
+      <div class="tray-total">
+        <span>Estimate</span>
+        <strong id="trayTotal">£0.00</strong>
+      </div>
+
+      <p class="tray-note">
+        Estimator only — payment taken in-store. Dine-in &amp; takeout. Delivery not offered.
+      </p>
+
+      <div class="tray-actions">
+        <button class="btn btn-quiet" id="trayClear">Clear</button>
+        <button class="btn btn-solid" id="trayConfirm">Save estimate</button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================ TOAST ============================ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="t-dot"></span>
+  <span id="toastText">Copied to clipboard</span>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
+const money = n => '£' + n.toFixed(2);
+
+/* ============================================================
+   WEB AUDIO — refined UI sound
+   ============================================================ */
+const Sfx = (() => {
+  let ctx = null, master = null, on = false;
+
+  function init(){
+    if (ctx) return ctx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    ctx = new AC();
+    master = ctx.createGain();
+    master.gain.value = 0.4;
+    master.connect(ctx.destination);
+    return ctx;
+  }
+
+  function tone(freq, dur, type, gain, slide){
+    if (!on) return;
+    const c = init(); if (!c) return;
+    if (c.state === 'suspended') c.resume();
+    const t = c.currentTime;
+    const osc = c.createOscillator();
+    const g = c.createGain();
+    const f = c.createBiquadFilter();
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freq, t);
+    if (slide) osc.frequency.exponentialRampToValueAtTime(slide, t + dur);
+    f.type = 'lowpass';
+    f.frequency.value = 2200;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(gain || 0.05, t + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    osc.connect(f).connect(g).connect(master);
+    osc.start(t); osc.stop(t + dur + 0.03);
+  }
+
+  return {
+    click(){ tone(520, 0.045, 'sine', 0.035, 380); },
+    toggle(a){ tone(a ? 480 : 700, 0.11, 'sine', 0.05, a ? 820 : 320); },
+    add(){ tone(740, 0.07, 'sine', 0.045, 980); },
+    remove(){ tone(420, 0.06, 'sine', 0.035, 300); },
+    success(){ [660, 990].forEach((f,i) => setTimeout(() => tone(f, 0.11, 'sine', 0.04, f*1.15), i*80)); },
+    error(){ tone(180, 0.14, 'sine', 0.035, 120); },
+    setOn(v){ on = v; },
+    isOn(){ return on; },
+    unlock(){ const c = init(); if (c && c.state === 'suspended') c.resume(); }
+  };
+})();
+
+/* ============================================================
+   MENU DATA
+   ============================================================ */
+const MENU = [
+  { id:'e1', cat:'espresso', code:'ESP-01', name:'Flat White', price:3.40,
+    desc:'Double ristretto, silky microfoam, served at six ounces.',
+    notes:'Cocoa nib · Toasted hazelnut · Brown butter',
+    meta:'Huila, Colombia · Washed · 6oz',
+    tags:['House'] },
+
+  { id:'e2', cat:'espresso', code:'ESP-02', name:'Cortado', price:3.00,
+    desc:'Equal parts espresso and steamed milk. Glass, always.',
+    notes:'Dark chocolate · Demerara · Orange peel',
+    meta:'Huila, Colombia · 1:1 ratio',
+    tags:['House'] },
+
+  { id:'e3', cat:'espresso', code:'ESP-03', name:'Double Espresso', price:2.40,
+    desc:'18g in, 36g out, twenty-seven seconds. The reference point.',
+    notes:'Baking spice · Black cherry · Molasses',
+    meta:'Huila, Colombia · 18g dose',
+    tags:['Vegan','GF'] },
+
+  { id:'e4', cat:'espresso', code:'ESP-04', name:'V60 Filter', price:3.80,
+    desc:'Hand-poured, single origin, four-minute extraction.',
+    notes:'Jasmine · White peach · Bergamot',
+    meta:'Yirgacheffe, Ethiopia · Light roast',
+    tags:['Vegan','GF'] },
+
+  { id:'e5', cat:'espresso', code:'ESP-05', name:'Oat Cappuccino', price:3.60,
+    desc:'Barista oat, dense foam, dusted with raw cocoa.',
+    notes:'Oat cream · Cacao · Soft caramel',
+    meta:'House blend · Barista oat · 6oz',
+    tags:['Vegan'] },
+
+  { id:'e6', cat:'espresso', code:'ESP-06', name:'Cold Brew 12h', price:4.20,
+    desc:'Twelve-hour steep, served over a single clear ice block.',
+    notes:'Cola nut · Fig · Cocoa',
+    meta:'Brazil / Colombia · 12-hour steep',
+    tags:['Vegan','GF'] },
+
+  { id:'l1', cat:'lager', code:'LAG-01', name:"Manfred's Helles", price:4.60,
+    desc:'House lagerbier. Crisp, clean, endlessly drinkable.',
+    notes:'Fresh bread · Lemon zest · Alpine herb',
+    meta:'Munich Helles · 4.8% ABV · 0.5L',
+    tags:['House'] },
+
+  { id:'l2', cat:'lager', code:'LAG-02', name:'Unfiltered Pilsner', price:4.80,
+    desc:'Hazy, naturally carbonated, poured slow with a thick head.',
+    notes:'Saaz hop · Green apple · Wet stone',
+    meta:'Czech Pilsner · 4.5% ABV · Saaz',
+    tags:[] },
+
+  { id:'l3', cat:'lager', code:'LAG-03', name:'Amber Kellerbier', price:5.20,
+    desc:'Cellar-conditioned, rustic, malt-forward with a dry finish.',
+    notes:'Toffee · Rye crust · Dried apricot',
+    meta:'Kellerbier · 5.2% ABV · Cellar',
+    tags:[] },
+
+  { id:'l4', cat:'lager', code:'LAG-04', name:'Schwarzbier', price:5.40,
+    desc:'Dark lager. Roast without weight — the bridge between coffee and beer.',
+    notes:'Espresso · Dark rye · Bitter chocolate',
+    meta:'Schwarzbier · 5.0% ABV · Munich dark',
+    tags:[] },
+
+  { id:'l5', cat:'lager', code:'LAG-05', name:'Session Lagerbier', price:4.20,
+    desc:'3.8% and perfectly built for a long afternoon.',
+    notes:'Cucumber · Lime leaf · Pilsner malt',
+    meta:'Session Lager · 3.8% ABV · 0.4L',
+    tags:[] },
+
+  { id:'l6', cat:'lager', code:'LAG-06', name:'Grapefruit Radler', price:4.00,
+    desc:'Lagerbier cut with fresh-pressed grapefruit. Dangerously easy.',
+    notes:'Pink grapefruit · Sherbet · Lemon peel',
+    meta:'Radler · 2.5% ABV · Fresh fruit',
+    tags:[] },
+
+  { id:'f1', cat:'food', code:'FD-01', name:'Almond Croissant', price:3.20,
+    desc:'Baked locally each morning, frangipane heavy, sugar dusted.',
+    notes:'Toasted almond · Butter · Vanilla',
+    meta:'Sheffield bakery · Baked 06:30',
+    tags:['Local'] },
+
+  { id:'f2', cat:'food', code:'FD-02', name:'Sourdough & Cultured Butter', price:3.80,
+    desc:'Thick-cut sourdough, salted cultured butter, flaky sea salt.',
+    notes:'Tangy crumb · Sea salt · Cream',
+    meta:'48-hour ferment · Two slices',
+    tags:['Local'] },
+
+  { id:'f3', cat:'food', code:'FD-03', name:'Pastel de Nata', price:2.80,
+    desc:'Blistered custard tart, cinnamon optional but recommended.',
+    notes:'Vanilla custard · Caramel · Cinnamon',
+    meta:'Lisbon style · Laminated pastry',
+    tags:[] },
+
+  { id:'f4', cat:'food', code:'FD-04', name:'Endcliffe Breakfast Bun', price:5.60,
+    desc:'Free-range egg, cured bacon, brown sauce, soft milk bun.',
+    notes:'Smoked bacon · Runny yolk · Sharp sauce',
+    meta:'Served until 14:00 · Free-range egg',
+    tags:[] },
+
+  { id:'f5', cat:'food', code:'FD-05', name:'Rosemary Focaccia', price:6.40,
+    desc:'House focaccia, whipped butterbean, slow-roast tomato, rocket.',
+    notes:'Rosemary · Olive oil · Roast tomato',
+    meta:'All day · Plant-based filling',
+    tags:['Vegan','GF'] },
+
+  { id:'f6', cat:'food', code:'FD-06', name:'Bavarian Pretzel', price:3.00,
+    desc:'Lye-baked, salted, served warm with mustard.',
+    notes:'Dark crust · Sea salt · Wholegrain mustard',
+    meta:'Lye-dipped · Served warm',
+    tags:['Vegan'] }
+];
+
+/* ============================================================
+   FEATURED (hero by mode)
+   ============================================================ */
+const FEATURED = {
+  espresso: {
+    tag:'Now pouring · ESP-01',
+    cat:'Speciality Espresso',
+    name:'Flat <em>White</em>',
+    desc:'Double ristretto, silky microfoam, served at six ounces. The reference point for the whole bar — if this isn\'t right, nothing else matters.',
+    flavor:'Cocoa nib · Toasted hazelnut · Brown butter',
+    price:'£3.40',
+    meta:'Huila, Colombia · Washed · 6oz'
+  },
+  lager: {
+    tag:'On tap · LAG-01',
+    cat:'Craft Lagerbier',
+    name:"Manfred's <em>Helles</em>",
+    desc:'The house lagerbier. Cold-fermented, decocted, and poured slow into a 0.5L stein. Crisp, clean, endlessly drinkable — the same intent as the espresso, in a different language.',
+    flavor:'Fresh bread · Lemon zest · Alpine herb',
+    price:'£4.60',
+    meta:'Munich Helles · 4.8% ABV · 0.5L'
+  }
+};
+
+/* ============================================================
+   REVIEWS DATA
+   ============================================================ */
+const REVIEWS = [
+  { name:'Hannah R.', rating:5, date:'2 weeks ago',
+    text:'Best flat white near Endcliffe Park. Genuinely. The crema is unreal and the staff remember your order after one visit.' },
+  { name:'Tom W.', rating:5, date:'3 weeks ago',
+    text:'Cozy spot for a daytime coffee that shifts perfectly into an evening craft lager. The Helles is crisp as anything and the room just works.' },
+  { name:'Priya S.', rating:5, date:'1 month ago',
+    text:'Impeccable local vibe right off Ecclesall Road. Concrete, wood, warm lighting, better coffee. Exactly what S11 needed.' },
+  { name:'Daniel O.', rating:5, date:'1 month ago',
+    text:'Came for the lager, stayed for the pastel de nata. A dangerous combination that I will be repeating weekly.' },
+  { name:'Megan L.', rating:5, date:'1 month ago',
+    text:'Small menu done properly. The V60 is absolutely worth the four-minute wait. Filter coffee as it should be.' },
+  { name:'Chris B.', rating:4, date:'2 months ago',
+    text:'Dog friendly, laptop friendly until around 5pm, then it turns into a proper little bar. Great balance.' },
+  { name:'Aisha K.', rating:5, date:'2 months ago',
+    text:'Walked out of Endcliffe Park and straight in. The Schwarzbier is a must — tastes like the bridge between their espresso and their beer.' },
+  { name:'Greg M.', rating:5, date:'2 months ago',
+    text:'Prices are honest — well under a tenner for a coffee and a pastry. A proper Sheffield gem off Rustlings Road.' },
+  { name:'Ellie D.', rating:5, date:'3 months ago',
+    text:'The oat cappuccino is silky and never bitter. You can tell they actually dial in the espresso every morning.' },
+  { name:'Sam T.', rating:5, date:'3 months ago',
+    text:'Takeout flat white before a park run, then back for a Radler in the evening. Perfect neighbourhood spot.' }
+];
+
+/* ============================================================
+   AMBIENT CANVAS — subtle particle field
+   ============================================================ */
+const FX = (() => {
+  const canvas = $('#fx');
+  if (!canvas) return { start(){}, setMode(){} };
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const TAU = Math.PI * 2;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0, H = 0, DPR = 1;
+  let particles = [];
+  let blend = 0, target = 0;
+  let raf = null;
+
+  function make(y){
+    return {
+      x: Math.random() * W,
+      y: y,
+      r: 1.2 + Math.random() * 3.4,
+      v: 0.08 + Math.random() * 0.32,
+      ph: Math.random() * TAU,
+      wob: 0.3 + Math.random() * 1.1,
+      d: 0.35 + Math.random() * 0.65,
+      s: Math.random()
+    };
+  }
+
+  function seed(){
+    const n = reduce ? 18 : clamp(Math.round((W*H) / 34000), 22, 62);
+    particles = new Array(n);
+    for (let i = 0; i < n; i++) particles[i] = make(Math.random() * H);
+  }
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = Math.floor(W * DPR);
+    canvas.height = Math.floor(H * DPR);
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    seed();
+  }
+
+  function frame(){
+    ctx.clearRect(0, 0, W, H);
+    blend += (target - blend) * 0.045;
+    if (Math.abs(target - blend) < 0.001) blend = target;
+    const b = blend;
+    const rise = 0.42 + b * 0.85;
+
+    for (let i = 0; i < particles.length; i++){
+      const p = particles[i];
+      p.ph += 0.009 * p.wob;
+      p.y -= p.v * rise * p.d;
+      p.x += Math.sin(p.ph) * (0.06 + b * 0.2) * p.d;
+
+      if (p.y < -40){
+        particles[i] = make(H + 30 + Math.random() * 60);
+        particles[i].x = Math.random() * W;
+        continue;
+      }
+      if (p.x < -40) p.x = W + 40;
+      else if (p.x > W + 40) p.x = -40;
+
+      // soft glow particle
+      const rad = p.r * (1.6 + b * 0.6);
+      const a = (0.05 + p.s * 0.07) * p.d * (1 - b * 0.35);
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad);
+      g.addColorStop(0, 'rgba(' + (b > 0.5 ? '212,182,94' : '196,134,76') + ',' + a.toFixed(4) + ')');
+      g.addColorStop(1, 'rgba(' + (b > 0.5 ? '212,182,94' : '196,134,76') + ',0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, rad, 0, TAU);
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start(){
+    resize();
+    if (raf) cancelAnimationFrame(raf);
+    frame();
+  }
+
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(resize, 200);
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden){ if (raf){ cancelAnimationFrame(raf); raf = null; } }
+    else if (!raf){ frame(); }
+  });
+
+  return {
+    start,
+    setMode(m){ target = m === 'lager' ? 1 : 0; }
+  };
+})();
+
+/* ============================================================
+   STATUS / HUD
+   ============================================================ */
+const Status = (() => {
+  const pill  = $('#statusPill');
+  const label = $('#statusLabel');
+  const OPEN = 8*60, CLOSE = 20*60;
+
+  function fmt(mins){
+    const h = Math.floor(mins / 60);
+    const m = Math.round(mins % 60);
+    if (h <= 0) return m + 'm';
+    if (m === 0) return h + 'h';
+    return h + 'h ' + m + 'm';
+  }
+
+  function tick(){
+    if (!pill || !label) return;
+    const d = new Date();
+    const mins = d.getHours() * 60 + d.getMinutes();
+
+    if (mins >= OPEN && mins < CLOSE){
+      const rem = CLOSE - mins;
+      pill.classList.remove('closed');
+      label.textContent = 'Open · closes ' + fmt(rem);
+      pill.setAttribute('aria-label', 'Open now. Closes in ' + fmt(rem) + '.');
+    } else {
+      const wait = mins < OPEN ? OPEN - mins : (24*60 - mins) + OPEN;
+      pill.classList.add('closed');
+      label.textContent = 'Closed · opens ' + fmt(wait);
+      pill.setAttribute('aria-label', 'Closed. Opens in ' + fmt(wait) + '.');
+    }
+  }
+
+  return { tick };
+})();
+
+/* ============================================================
+   MODE CONTROLLER
+   ============================================================ */
+const Mode = (() => {
+  const buttons = $$('.mode-switch button');
+  const word = $('#heroWord');
+  const lede = $('#heroLede');
+  const imgs = $$('[data-mode-img]');
+  const featTag = $('#featuredTag');
+  const featCat = $('#featuredCat');
+  const featName = $('#featuredName');
+  const featDesc = $('#featuredDesc');
+  const featFlavor = $('#featuredFlavor');
+  const featPrice = $('#featuredPrice');
+  const featMeta = $('#featuredMeta');
+
+  let current = 'espresso';
+
+  const LEDE = {
+    espresso: 'A dual-purpose room on the edge of the park. Single-origin <strong>espresso by day</strong>, cold-fermented <strong>lagerbier by night</strong> — poured with the same intent.',
+    lager:    'The lights drop, the taps open. Cold-fermented <strong>lagerbier by night</strong>, single-origin <strong>espresso by day</strong> — the same room, a different frequency.'
+  };
+
+  function apply(mode, silent){
+    if (mode === current && !silent) return;
+    current = mode;
+    document.body.dataset.mode = mode;
+
+    buttons.forEach(b => {
+      b.setAttribute('aria-selected', b.dataset.mode === mode ? 'true' : 'false');
+    });
+
+    // Hero word
+    if (word){
+      word.style.opacity = '0';
+      word.style.transition = 'opacity .3s ease';
+      setTimeout(() => {
+        word.textContent = mode === 'lager' ? 'lagerbier' : 'espresso';
+        word.style.opacity = '1';
+      }, 180);
+    }
+
+    // Lede
+    if (lede){
+      lede.style.opacity = '0';
+      lede.style.transform = 'translateY(6px)';
+      lede.style.transition = 'opacity .35s ease, transform .35s ease';
+      setTimeout(() => {
+        lede.innerHTML = LEDE[mode];
+        lede.style.opacity = '1';
+        lede.style.transform = 'none';
+      }, 200);
+    }
+
+    // Hero images
+    imgs.forEach(img => {
+      img.classList.toggle('active', img.dataset.modeImg === mode);
+    });
+
+    // Featured block
+    const f = FEATURED[mode];
+    if (featTag){
+      const els = [featTag, featCat, featName, featDesc, featFlavor, featPrice, featMeta];
+      els.forEach(el => {
+        el.style.transition = 'opacity .3s ease, transform .3s ease';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(6px)';
+      });
+      setTimeout(() => {
+        featTag.textContent = f.tag;
+        featCat.textContent = f.cat;
+        featName.innerHTML = f.name;
+        featDesc.textContent = f.desc;
+        featFlavor.textContent = f.flavor;
+        featPrice.textContent = f.price;
+        featMeta.textContent = f.meta;
+        els.forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }, 240);
+    }
+
+    FX.setMode(mode);
+
+    // Featured items highlight
+    $$('.menu-item').forEach(item => {
+      const cat = item.dataset.cat;
+      const hot = (mode === 'espresso' && cat === 'espresso') ||
+                  (mode === 'lager' && cat === 'lager');
+      item.style.opacity = hot ? '1' : '';
+    });
+
+    if (!silent && Sfx.isOn()){
+      Sfx.toggle(mode === 'lager');
+    }
+    if (!silent && window.__toast){
+      window.__toast(mode === 'lager' ? 'Lagerbier mode' : 'Espresso mode');
+    }
+  }
+
+  function init(){
+    buttons.forEach(b => b.addEventListener('click', () => {
+      apply(b.dataset.mode);
+      if (Sfx.isOn()) Sfx.click();
+    }));
+    apply('espresso', true);
+  }
+
+  return { init, apply, get(){ return current; } };
+})();
+
+/* ============================================================
+   MENU RENDER
+   ============================================================ */
+const Menu = (() => {
+  const grid = $('#menuGrid');
+  const filterBtns = $$('.filter-btn');
+  let active = 'all';
+
+  function buildItem(item){
+    const el = document.createElement('article');
+    el.className = 'menu-item';
+    el.dataset.cat = item.cat;
+    el.dataset.id = item.id;
+    el.tabIndex = 0;
+
+    const tagsHTML = item.tags.length
+      ? item.tags.map(t => '<span class="menu-tag' + (t === 'House' ? ' accent' : '') + '">' + t + '</span>').join('')
+      : '<span class="menu-tag">À la carte</span>';
+
+    el.innerHTML =
+      '<div class="menu-row">' +
+        '<span class="menu-name">' + item.name + '</span>' +
+        '<span class="menu-leader"></span>' +
+        '<span class="menu-price">' + money(item.price) + '</span>' +
+      '</div>' +
+      '<div class="menu-sub">' +
+        '<p class="menu-desc">' + item.desc + '</p>' +
+        '<button class="add-inline" type="button" data-add="' + item.id + '">Add +</button>' +
+      '</div>' +
+      '<div class="menu-notes">' + item.notes + '</div>' +
+      '<div class="menu-tags" style="margin-top:10px">' + tagsHTML + '</div>';
+
+    return el;
+  }
+
+  function render(){
+    const frag = document.createDocumentFragment();
+    MENU.forEach(i => frag.appendChild(buildItem(i)));
+    grid.appendChild(frag);
+
+    const counts = { all: MENU.length, espresso:0, lager:0, food:0 };
+    MENU.forEach(i => counts[i.cat]++);
+    $$('.filter-btn .count').forEach(el => {
+      const k = el.dataset.count;
+      el.textContent = counts[k] ?? '';
+    });
+  }
+
+  function setFilter(f){
+    active = f;
+    filterBtns.forEach(b => {
+      const on = b.dataset.filter === f;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    $$('.menu-item', grid).forEach(item => {
+      const show = f === 'all' || item.dataset.cat === f;
+      item.classList.toggle('hidden', !show);
+    });
+  }
+
+  function init(){
+    render();
+    filterBtns.forEach(b => b.addEventListener('click', () => {
+      setFilter(b.dataset.filter);
+      if (Sfx.isOn()) Sfx.click();
+    }));
+
+    grid.addEventListener('click', e => {
+      const btn = e.target.closest('[data-add]');
+      if (!btn) return;
+      const id = btn.dataset.add;
+      const item = MENU.find(m => m.id === id);
+      if (!item) return;
+
+      Tray.add(item);
+
+      btn.classList.add('added');
+      btn.textContent = 'Added ✓';
+      clearTimeout(btn.__t);
+      btn.__t = setTimeout(() => {
+        btn.classList.remove('added');
+        btn.textContent = 'Add +';
+      }, 1400);
+    });
+  }
+
+  return { init, setFilter };
+})();
+
+/* ============================================================
+   TRAY
+   ============================================================ */
+const Tray = (() => {
+  const trayEl   = $('#tray');
+  const headEl   = $('#trayHead');
+  const listEl   = $('#trayList');
+  const countEl  = $('#trayCount');
+  const miniEl   = $('#trayMini');
+  const totalEl  = $('#trayTotal');
+  const gaugeEl  = $('#trayGauge');
+  const gaugeLbl = $('#trayGaugeLabel');
+  const clearBtn = $('#trayClear');
+  const confirmBtn = $('#trayConfirm');
+
+  const MAX = 10;
+  const cart = new Map();
+
+  function open(){ trayEl.classList.add('open'); headEl.setAttribute('aria-expanded','true'); }
+  function close(){ trayEl.classList.remove('open'); headEl.setAttribute('aria-expanded','false'); }
+  function toggle(){ trayEl.classList.contains('open') ? close() : open(); }
+
+  function totals(){
+    let c = 0, s = 0;
+    cart.forEach(({ item, qty }) => { c += qty; s += item.price * qty; });
+    return { count: c, sum: s };
+  }
+
+  function render(){
+    const { count, sum } = totals();
+    countEl.textContent = count;
+    miniEl.textContent = money(sum);
+    totalEl.textContent = money(sum);
+    const pct = clamp((sum / MAX) * 100, 0, 100);
+    gaugeEl.style.width = pct + '%';
+    if (gaugeLbl) gaugeLbl.textContent = money(sum) + ' / ' + money(MAX);
+
+    if (cart.size === 0){
+      listEl.innerHTML = '<li class="tray-empty">Tray empty<br>Select items from the menu</li>';
+      return;
+    }
+
+    listEl.innerHTML = '';
+    cart.forEach(({ item, qty }, id) => {
+      const li = document.createElement('li');
+      li.className = 'tray-row';
+      li.innerHTML =
+        '<div class="r-info">' +
+          '<div class="r-name">' + item.name + '</div>' +
+          '<span class="r-code">' + item.code + '</span>' +
+        '</div>' +
+        '<div class="qty">' +
+          '<button type="button" data-dec="' + id + '" aria-label="Decrease">−</button>' +
+          '<span>' + qty + '</span>' +
+          '<button type="button" data-inc="' + id + '" aria-label="Increase">+</button>' +
+        '</div>' +
+        '<div class="r-price">' + money(item.price * qty) + '</div>';
+      listEl.appendChild(li);
+    });
+  }
+
+  function add(item){
+    const e = cart.get(item.id);
+    if (e) e.qty++;
+    else cart.set(item.id, { item, qty: 1 });
+    if (Sfx.isOn()) Sfx.add();
+    render();
+    open();
+  }
+
+  function inc(id){ const e = cart.get(id); if (!e) return; e.qty++; if (Sfx.isOn()) Sfx.click(); render(); }
+  function dec(id){ const e = cart.get(id); if (!e) return; e.qty--; if (e.qty <= 0) cart.delete(id); if (Sfx.isOn()) Sfx.remove(); render(); }
+  function clear(){ if (cart.size === 0){ if (Sfx.isOn()) Sfx.error(); return; } cart.clear(); if (Sfx.isOn()) Sfx.remove(); render(); if (window.__toast) window.__toast('Tray cleared'); }
+  function confirm(){
+    const { count, sum } = totals();
+    if (count === 0){ if (Sfx.isOn()) Sfx.error(); if (window.__toast) window.__toast('Tray is empty'); return; }
+    if (Sfx.isOn()) Sfx.success();
+    if (window.__toast) window.__toast(count + ' item' + (count > 1 ? 's' : '') + ' · ' + money(sum) + ' saved');
+  }
+
+  function init(){
+    headEl.addEventListener('click', () => { toggle(); if (Sfx.isOn()) Sfx.click(); });
+    clearBtn.addEventListener('click', clear);
+    confirmBtn.addEventListener('click', confirm);
+    listEl.addEventListener('click', e => {
+      const i = e.target.closest('[data-inc]');
+      const d = e.target.closest('[data-dec]');
+      if (i) inc(i.dataset.inc);
+      if (d) dec(d.dataset.dec);
+    });
+    render();
+  }
+
+  return { init, add, clear };
+})();
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+const Reviews = (() => {
+  const grid = $('#reviewGrid');
+  const search = $('#reviewSearch');
+  const starArray = $('#starArray');
+
+  const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4l2.9 6.06 6.66.9-4.86 4.62 1.2 6.62L12 17.5l-5.9 3.1 1.2-6.62L2.44 9.36l6.66-.9L12 2.4z"/></svg>';
+  const STAR_DIM = '<svg class="dim" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4l2.9 6.06 6.66.9-4.86 4.62 1.2 6.62L12 17.5l-5.9 3.1 1.2-6.62L2.44 9.36l6.66-.9L12 2.4z"/></svg>';
+
+  const esc = s => s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+
+  function initials(n){ return n.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase(); }
+  function stars(r){ let h=''; for (let i=1;i<=5;i++) h += i<=r ? STAR : STAR_DIM; return h; }
+
+  function highlight(text, q){
+    const safe = esc(text);
+    if (!q) return safe;
+    const re = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return safe.replace(new RegExp('(' + re + ')', 'ig'), '<mark>$1</mark>');
+  }
+
+  function render(q){
+    const query = (q || '').trim().toLowerCase();
+    const list = query
+      ? REVIEWS.filter(r => (r.name + ' ' + r.text).toLowerCase().includes(query))
+      : REVIEWS;
+
+    if (list.length === 0){
+      grid.innerHTML = '<div class="no-results">No matching reviews for “' + esc(q) + '”</div>';
+      return;
+    }
+
+    grid.innerHTML = list.map((r, i) =>
+      '<article class="review" style="animation-delay:' + (i * 0.035) + 's">' +
+        '<div class="review-head">' +
+          '<div class="review-avatar">' + initials(r.name) + '</div>' +
+          '<div>' +
+            '<div class="review-name">' + esc(r.name) + '</div>' +
+            '<div class="review-date">' + esc(r.date) + ' · Google</div>' +
+          '</div>' +
+          '<div class="review-stars" aria-label="' + r.rating + ' stars">' + stars(r.rating) + '</div>' +
+        '</div>' +
+        '<p class="review-body">' + highlight(r.text, query) + '</p>' +
+      '</article>'
+    ).join('');
+  }
+
+  function init(){
+    if (starArray) starArray.innerHTML = stars(5);
+    render('');
+    let t;
+    search.addEventListener('input', e => {
+      clearTimeout(t);
+      t = setTimeout(() => render(e.target.value), 140);
+    });
+  }
+
+  return { init };
+})();
+
+/* ============================================================
+   HOURS
+   ============================================================ */
+const Hours = (() => {
+  const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const el = $('#hoursList');
+
+  function render(){
+    if (!el) return;
+    const today = new Date().getDay();
+    const order = [1,2,3,4,5,6,0];
+    el.innerHTML = order.map(i =>
+      '<div class="hours-row' + (i === today ? ' today' : '') + '">' +
+        '<span class="day">' + DAYS[i].slice(0,3) + '</span>' +
+        '<span class="time">08:00 — 20:00</span>' +
+      '</div>'
+    ).join('');
+  }
+
+  return { init: render, render };
+})();
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+const Toast = (() => {
+  const el = $('#toast');
+  const text = $('#toastText');
+  let t;
+  function show(msg){
+    text.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(t);
+    t = setTimeout(() => el.classList.remove('show'), 2400);
+  }
+  return { show };
+})();
+window.__toast = Toast.show;
+
+/* ============================================================
+   COPY ADDRESS
+   ============================================================ */
+function initCopy(){
+  const btn = $('#copyAddr');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const txt = btn.dataset.copy;
+    try {
+      if (navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(txt);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      if (Sfx.isOn()) Sfx.success();
+      Toast.show('Copied to clipboard');
+      const orig = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      setTimeout(() => { btn.textContent = orig; }, 1600);
+    } catch (err){
+      if (Sfx.isOn()) Sfx.error();
+      Toast.show('Copy failed');
+    }
+  });
+}
+
+/* ============================================================
+   SCROLL UI
+   ============================================================ */
+function initScroll(){
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  $$('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = (Math.min(i, 6) * 0.06) + 's';
+    io.observe(el);
+  });
+}
+
+/* ============================================================
+   TICKER DUPLICATION
+   ============================================================ */
+function initTicker(){
+  const t = $('#tickerTrack');
+  if (t) t.innerHTML += t.innerHTML;
+}
+
+/* ============================================================
+   SOUND UNLOCK (silent by default; unlock on first gesture)
+   ============================================================ */
+function initSound(){
+  const unlock = () => {
+    Sfx.unlock();
+    window.removeEventListener('pointerdown', unlock);
+    window.removeEventListener('keydown', unlock);
+  };
+  window.addEventListener('pointerdown', unlock, { once: true });
+  window.addEventListener('keydown', unlock, { once: true });
+
+  // Enable sound on first user gesture for a premium feel
+  const enable = () => {
+    Sfx.setOn(true);
+    window.removeEventListener('pointerdown', enable);
+  };
+  window.addEventListener('pointerdown', enable, { once: true });
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+function boot(){
+  $('#year').textContent = new Date().getFullYear();
+
+  FX.start();
+  Mode.init();
+  Menu.init();
+  Tray.init();
+  Reviews.init();
+  Hours.init();
+  initCopy();
+  initScroll();
+  initTicker();
+  initSound();
+
+  Status.tick();
+  setInterval(Status.tick, 30000);
+  setInterval(Hours.render, 600000);
+
+  console.log(
+    '%c MANFRED\'S %c Speciality Coffee & Lagerbier · Sheffield S11 ',
+    'background:#C4864C;color:#0C0A08;font-weight:600;padding:5px 10px;border-radius:3px 0 0 3px;letter-spacing:.05em;',
+    'background:#0C0A08;color:#F0EAE0;font-weight:400;padding:5px 10px;border-radius:0 3px 3px 0;letter-spacing:.05em;'
+  );
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+
+})();
+</script>
 </body>
 </html>
